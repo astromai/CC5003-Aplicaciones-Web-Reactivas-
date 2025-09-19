@@ -1,4 +1,4 @@
-interface Ramo {
+export interface Ramo {
   id: number;
   nombre: string;
   codigo: string;
@@ -7,7 +7,7 @@ interface Ramo {
 
 export const RamoDisplay = ({ ramo }: { ramo: Ramo }) => {
   return (
-    <div>
+    <div style={{ padding: 8 }}>
       <p>
         <strong>Nombre: </strong>
         {ramo.nombre}
