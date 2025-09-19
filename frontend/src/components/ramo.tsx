@@ -17,7 +17,7 @@ export const RamoDisplay = ({ ramo }: { ramo: Ramo }) => {
         {ramo.codigo}
       </p>
       <p>
-        <strong>Código: </strong>
+        <strong>Créditos: </strong>
         {ramo.creditos}
       </p>
     </div>

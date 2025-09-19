@@ -6,7 +6,7 @@ interface Semestre {
   ramos: Ramo[];
 }
 
-export default function Semestre({ titulo, ramos }: Semestre) {
+export default function SemestreDisplay({ titulo, ramos }: Semestre) {
   return (
     <div style={{ margin: 12, padding: 12, background: "#f5f5f5", borderRadius: 8 }}>
       <h2 style={{ textAlign: "center", marginBottom: 8 }}>{titulo}</h2>
