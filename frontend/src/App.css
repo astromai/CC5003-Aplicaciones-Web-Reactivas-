@@ -1,10 +1,10 @@
 body {
-  font-family: sans-serif;
-  color: #000; 
-  background-color: #f0f0f0; 
   margin: 0;
   padding: 0;
+  background-color: #201d1de9; 
+  font-family: Arial, sans-serif;
 }
+
 
 #root {
   max-width: 1280px;
