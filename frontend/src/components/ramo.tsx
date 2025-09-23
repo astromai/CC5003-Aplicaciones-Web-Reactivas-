@@ -5,6 +5,11 @@ export interface Ramo {
   creditos: number;
 }
 
+export interface DetallesRamo extends Ramo {
+  descripcion: string;
+  porcentajeAprobacion: number;
+}
+
 export const RamoDisplay = ({ ramo }: { ramo: Ramo }) => {
   return (
     <div style={{ padding: 8 }}>
