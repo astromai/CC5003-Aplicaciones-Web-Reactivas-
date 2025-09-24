@@ -64,7 +64,7 @@ export default function Detalle() {
   return (
     <div style={{ padding: 24 }}>
       <DetalleDisplay ramo={curso} />
-      <button onClick={() => navigate('/')}> Volver a la malla</button>
+      <button onClick={() => navigate('/')} style={{backgroundColor:'#d3f4ff'}}> Volver a la malla</button>
       
     </div>
   );

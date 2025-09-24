@@ -23,7 +23,7 @@ export const RamoDisplay = ({ ramo }: { ramo: Ramo }) => {
   };
 
   // Colores según estado
-  const colores = ["#555", "#FFD700", "#4CE48B"]; 
+  const colores = ["#ffffffff", "#FFD700", "#4CE48B"]; 
   // gris oscuro, amarillo, verde
 
   return (
