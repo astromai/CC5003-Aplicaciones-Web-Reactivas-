@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export interface Ramo {
   id: number;
@@ -38,7 +39,9 @@ export const RamoDisplay = ({ ramo }: { ramo: Ramo }) => {
     >
       <p>
         <strong>Nombre: </strong>
-        {ramo.nombre}
+        <Link to={`/curso/${ramo.id}`} onClick={(e) => e.stopPropagation()}style={{ color: 'inherit'}}>
+          {ramo.nombre}
+        </Link>
       </p>
       <p>
         <strong>Código: </strong>
