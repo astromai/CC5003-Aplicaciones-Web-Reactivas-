@@ -1,24 +1,23 @@
 {
-  "name": "backend",
+  "name": "backend-uramos",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend para la aplicación URamos",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "json-server": "json-server --watch db.json --port 3000"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev src/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "dotenv": "^16.3.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.0.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.3",
     "@types/node": "^24.5.0",
-    "json-server": "^1.0.0-beta.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
   }
