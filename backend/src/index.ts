@@ -66,6 +66,15 @@ const errorHandler = (
 };
 app.use(errorHandler);
 
+// -- Tipado personalizado para Express Request ---
+declare global {
+  namespace Express {
+    interface Request {
+      userId?: string;
+    }
+  }
+}
+
 // --- Iniciar Servidor ---
 const PORT = config.PORT;
 app.listen(PORT, () => {

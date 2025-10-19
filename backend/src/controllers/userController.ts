@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from 'express';
-import User from "../models/user";
+import User from "../models/User";
 import config from "../utils/config";
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -58,7 +58,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
 export const me = async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
-  const user = await User.findById(req.id);
+  const user = await User.findById(req.userId);;
   res.status(200).json(user);
 };
 
