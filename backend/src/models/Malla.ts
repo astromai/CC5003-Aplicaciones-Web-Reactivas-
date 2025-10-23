@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-// --- Sub-documento: Ramo Cursado ---
+// --- SCHEMA DE RAMO CURSADO ---
 const ramoCursadoSchema = new mongoose.Schema({
   ramo: { 
     type: mongoose.Schema.Types.ObjectId, 
@@ -14,7 +14,7 @@ const ramoCursadoSchema = new mongoose.Schema({
   }
 });
 
-// --- Sub-documento: Semestre de la Malla ---
+// --- SCHEMA DE SEMESTRE EN LA MALLA ---
 const semestreEnMallaSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
   ramos: [ramoCursadoSchema] 
@@ -27,6 +27,7 @@ const mallaSchema = new mongoose.Schema({
   semestres: [semestreEnMallaSchema]
 });
 
+// --- EL MODELO DE LA MALLA ---
 const MallaModel = mongoose.model("Malla", mallaSchema);
 mallaSchema.set("toJSON", {
   transform: (returnedObject: { id?: string, _id?: mongoose.Types.ObjectId, __v?: number }) => {

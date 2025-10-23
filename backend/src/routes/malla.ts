@@ -5,7 +5,6 @@ const router = express.Router();
 
 // --- Definición de Rutas para Mallas ---
 
-// 
 //Función para crear malla
 router.post('/', createMalla);
 

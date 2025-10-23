@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// --- INTERFAZ DE RAMO ---
 export interface Ramo {
   id: string;
   nombre: string;
@@ -9,6 +10,7 @@ export interface Ramo {
   porcentajeAprobacion: number;
 }
 
+// --- SCHEMA DE RAMO ---
 const ramoSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   codigo: { type: String, required: true, unique: true },
@@ -16,7 +18,11 @@ const ramoSchema = new mongoose.Schema({
   descripcion: { type: String, required: true },
   porcentajeAprobacion: { type: Number, required: true }
 });
+
+// --- MODELO DE RAMO ---
 const RamoModel= mongoose.model<Ramo>("Ramo", ramoSchema);
+
+// --- CONFIGURACIÓN DEL SCHEMA ---
 ramoSchema.set("toJSON", {
   transform: (returnedObject: { id?: string, _id?: mongoose.Types.ObjectId, __v?: number }) => {
     returnedObject.id = returnedObject._id?.toString();
