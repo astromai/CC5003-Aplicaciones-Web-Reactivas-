@@ -30,9 +30,14 @@ const restoreLogin = async () => {
     }
 };
 
+const register = async (credentials: Credentials) => {
+    const response = await axios.post("/api/user/register", credentials);
+    return response.data;
+};
+
 const logout = async () => {
     await axiosSecure.post("/api/user/logout");
     localStorage.removeItem("csrfToken");
 };
 
-export default { login, restoreLogin, logout };
+export default { login, register, restoreLogin, logout };

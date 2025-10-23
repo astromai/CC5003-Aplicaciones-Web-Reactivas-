@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react'
 import Malla from './components/malla'
 import Detalle from './components/detalle'
 import Login from './components/login'
+import Register from './components/Register'
 import loginService from './services/login'
 import './App.css'
 
 function App() {
   const [user, setUser] = useState(null)
+  const [showRegister, setShowRegister] = useState(false)
 
   useEffect(() => {
     const init = async () => {
@@ -20,6 +22,7 @@ function App() {
   const handleLogout = () => {
     loginService.logout()
     setUser(null)
+    setShowRegister(false) // Volver a Login, no Register
   }
 
   return (
@@ -28,7 +31,11 @@ function App() {
         <h1 style={{ textAlign: 'center', margin: 24 }}>Malla Curricular</h1>
         
         {!user ? (
-          <Login onLoginSuccess={setUser} />
+          showRegister ? (
+            <Register onRegisterSuccess={setUser} />
+          ) : (
+            <Login onLoginSuccess={setUser} onShowRegister={() => setShowRegister(true)} />
+          )
         ) : (
           <div>
             <p>
