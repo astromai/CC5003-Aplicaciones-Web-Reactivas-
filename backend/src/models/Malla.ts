@@ -24,6 +24,7 @@ const semestreEnMallaSchema = new mongoose.Schema({
 // --- EL SCHEMA PRINCIPAL DE LA MALLA ---
 const mallaSchema = new mongoose.Schema({
   nombre: { type: String, required: true, default: 'Mi Malla' },
+  usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   semestres: [semestreEnMallaSchema]
 });
 

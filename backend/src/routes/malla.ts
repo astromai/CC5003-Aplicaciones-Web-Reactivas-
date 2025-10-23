@@ -1,17 +1,12 @@
 import express from 'express';
-import { createMalla , addRamoToSemestre,getMallaById} from '../controllers/mallaController';
+import { withUser } from '../utils/middleware'; 
+import { createMalla, addRamoToSemestre, getMallaById } from '../controllers/mallaController';
 
 const router = express.Router();
 
 // --- Definición de Rutas para Mallas ---
-
-//Función para crear malla
-router.post('/', createMalla);
-
-// Aquí añadiremos más rutas en el futuro para obtener y modificar las mallas.
-router.post('/:mallaId/ramos', addRamoToSemestre);
-
-router.get('/:mallaId', getMallaById);
-
+router.post('/', withUser, createMalla); 
+router.post('/:mallaId/ramos', withUser, addRamoToSemestre);
+router.get('/:mallaId', withUser, getMallaById);
 
 export default router;

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Malla from './components/malla'
 import Detalle from './components/detalle'
 import Login from './components/login'
-import Register from './components/Register'
+import Register from './components/register'
 import loginService from './services/login'
 import './App.css'
 

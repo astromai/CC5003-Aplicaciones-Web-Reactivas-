@@ -4,6 +4,7 @@ dotenv.config();
 import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import config from "./utils/config";
 import semestreRoutes from './routes/semestres';
 import ramoRoutes from './routes/ramos';
@@ -30,6 +31,8 @@ app.use(cors({
   exposedHeaders: ['X-CSRF-Token']
 }));
 app.use(express.json());
+
+app.use(cookieParser());
 
 const requestLogger = (
   request: Request,
