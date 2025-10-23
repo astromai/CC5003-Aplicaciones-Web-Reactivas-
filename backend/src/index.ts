@@ -24,7 +24,10 @@ mongoose.connect(config.MONGODB_URI!)
 const app = express();
 
 // --- Middlewares ---
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:3001'],
+  credentials: true
+}));
 app.use(express.json());
 
 const requestLogger = (

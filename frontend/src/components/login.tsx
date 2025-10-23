@@ -21,7 +21,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       setPassword("");
       onLoginSuccess(user);
     } catch (exception) {
-      // Sin manejo de errores
+      console.error("Error en login:", exception);
     }
   };
 
