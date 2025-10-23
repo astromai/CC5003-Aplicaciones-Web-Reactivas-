@@ -12,7 +12,7 @@ type Credentials = {
 const login = async (credentials: Credentials) => {
     const response = await axios.post("/api/user/login", credentials);
     
-    const csrfToken = response.headers["x-csrf-token"];
+    const csrfToken = response.headers["X-CSRF-Token"];
     
     if (csrfToken) {
         localStorage.setItem("csrfToken", csrfToken);

@@ -1,5 +1,5 @@
 import express from 'express';
-
+import { withUser } from '../utils/middleware';
 import { login, register, logout, me } from '../controllers/userController';
 
 const router = express.Router();
@@ -16,6 +16,6 @@ router.post('/register', register)
 router.post('/logout', logout)
 
 // Definimos la ruta para me
-router.post('/me', me)
+router.get("/me", withUser, me);
 
 export default router;
