@@ -37,7 +37,7 @@ export default function Detalle() {
 
   useEffect(() => {
     if (id) {
-      axios.get("http://localhost:3000/semestres")
+      axios.get("http://localhost:3001/api/semestres")
         .then(res => {
           const semestres = res.data;
           let cursoEncontrado = null;

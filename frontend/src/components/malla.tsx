@@ -8,7 +8,7 @@ export default function Malla() {
   const [semestres, setSemestres] = useState<{ id: number, titulo: string; ramos: Ramo[] }[]>([]);
   // render data from backend
   useEffect(() => {
-    axios.get("http://localhost:3000/semestres")
+    axios.get("http://localhost:3001/api/semestres")
       .then(res => {
         setSemestres(res.data);
         console.log(res.data);
