@@ -3,11 +3,7 @@ import axiosSecure from "../utils/axiosSecure";
 import SemestreDisplay from "./semestre"; 
 import { useState, useEffect } from "react";
 
-interface SemestreData {
-  id: number;
-  titulo: string;
-  ramos: Array<Ramo>;
-}
+
 
 interface Semestre {
   titulo: string;

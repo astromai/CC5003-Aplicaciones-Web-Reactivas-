@@ -19,13 +19,15 @@ JWT_SECRET=miclavesecreta
 
 ## ¿Como correr nuestra aplicación?
 Para el backend deben hacer lo siguiente.
-1) cd backend
-2) npm install, para descargar las librerías necesarias para el proyecto.
-2) npm run dev
+1) Tener abierto una base de datos local MongoDB
+2) cd backend
+3) npx ts-node Scripts/seed.ts para poblar la base de datos
+4) npm install, para descargar las librerías necesarias para el proyecto.
+5) npm run dev
 
 Para el frontend deben hacer lo siguiente (en otra terminal).
 1) cd frontend 
 2) npm install, para descargar las librerías necesarias para el proyecto.
-2) npm run dev
+3) npm run dev
 
 Asi podemos conectar adecuadamente el backend con frontend.

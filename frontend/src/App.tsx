@@ -6,11 +6,9 @@ import Login from './components/login'
 import Register from './components/register'
 import loginService from './services/login'
 import './App.css'
+import {User} from './types/user'
 
-interface User {
-  username: string;
-  id: string;
-}
+
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
