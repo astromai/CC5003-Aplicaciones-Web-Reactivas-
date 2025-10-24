@@ -4,9 +4,10 @@ import { RamoDisplay } from "./ramo";
 export interface Semestre {
   titulo: string;
   ramos: Ramo[];
+  onRamoEstadoChange?: (ramoId: number, nuevoEstado: 'pendiente' | 'cursando' | 'aprobado' | 'reprobado') => void;
 }
 
-export default function SemestreDisplay({ titulo, ramos }: Semestre) {
+export default function SemestreDisplay({ titulo, ramos, onRamoEstadoChange }: Semestre) {
   return (
     <div style={{ margin: 12, padding: 12, background: "#2b2b2b", borderRadius: 8 }}>
       <h2 style={{ textAlign: "center", marginBottom: 12, color: "white" }}>
@@ -14,7 +15,11 @@ export default function SemestreDisplay({ titulo, ramos }: Semestre) {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {ramos.map((r) => (
-          <RamoDisplay key={r.id} ramo={r} />
+          <RamoDisplay 
+            key={r.id} 
+            ramo={r} 
+            onEstadoChange={onRamoEstadoChange ? (estado) => onRamoEstadoChange(r.id, estado) : undefined}
+          />
         ))}
       </div>
     </div>

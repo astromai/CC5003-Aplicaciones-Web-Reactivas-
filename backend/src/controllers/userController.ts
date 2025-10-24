@@ -83,15 +83,22 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
 // --- Función para ME ---
 export const me = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Buscamos el usuario en la base de datos usando el ID del token
+    const user = await User.findById(req.userId);
+    
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
 
-  // Obtenemos el body.
-  const body = req.body;
-
-  // Buscamos el usuario en la base de datos.
-  const user = await User.findById(req.userId);;
-
-  // Enviamos el usuario.
-  res.status(200).json(user);
+    // Enviamos solo la información necesaria del usuario
+    res.status(200).json({
+      username: user.username,
+      id: user._id
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 // --- Función para LOGOUT ---

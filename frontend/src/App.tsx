@@ -7,8 +7,13 @@ import Register from './components/register'
 import loginService from './services/login'
 import './App.css'
 
+interface User {
+  username: string;
+  id: string;
+}
+
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [showRegister, setShowRegister] = useState(false)
 
   useEffect(() => {

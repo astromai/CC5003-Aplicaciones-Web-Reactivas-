@@ -65,11 +65,11 @@ export const withUser = async (
       res.status(401).json({ error: "missing token" });
     } else {
       const decodedToken = jwt.verify(token, config.JWT_SECRET);
-      const csrfToken = req.headers["X-CSRF-Token"];
+      const csrfToken = req.headers["x-csrf-token"];
       if (
         typeof decodedToken === "object" &&
         decodedToken.id &&
-        decodedToken.csrf == csrfToken
+        decodedToken.csrf === csrfToken
       ) {
         authReq.userId = decodedToken.id;
         next();

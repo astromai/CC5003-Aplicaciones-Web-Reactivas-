@@ -1,8 +1,9 @@
 import { useState } from "react";
 import loginService from "../services/login";
+import type { User } from "../types/user";
 
 interface LoginProps {
-  onLoginSuccess: (user: any) => void;
+  onLoginSuccess: (user: User) => void;
   onShowRegister: () => void;
 }
 

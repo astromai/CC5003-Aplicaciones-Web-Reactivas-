@@ -1,8 +1,9 @@
 import { useState } from "react";
 import loginService from "../services/login";
+import type { User } from "../types/user";
 
 interface RegisterProps {
-  onRegisterSuccess: (user: any) => void;
+  onRegisterSuccess: (user: User) => void;
 }
 
 export default function Register({ onRegisterSuccess }: RegisterProps) {

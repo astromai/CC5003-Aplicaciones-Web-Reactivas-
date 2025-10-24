@@ -17,7 +17,7 @@ const ramosParaGuardar = data.semestres.flatMap((semestre: any) => semestre.ramo
 const importarDatos = async () => {
   try {
     // 1. Conectarnos a la base de datos
-    await mongoose.connect(process.env.MONGO_URI!);
+    await mongoose.connect(process.env.MONGODB_URI!);
     console.log('Conectado a la base de datos para la siembra...');
 
     // 2. Limpiar la base de datos para evitar duplicados

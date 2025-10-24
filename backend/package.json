@@ -9,6 +9,7 @@
     "dev": "ts-node-dev src/index.ts"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

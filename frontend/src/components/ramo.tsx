@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export interface Ramo {
@@ -6,6 +5,7 @@ export interface Ramo {
   nombre: string;
   codigo: string;
   creditos: number;
+  estado?: 'aprobado' | 'cursando' | 'reprobado' | 'pendiente';
 }
 
 export interface DetallesRamo extends Ramo {
@@ -13,27 +13,41 @@ export interface DetallesRamo extends Ramo {
   porcentajeAprobacion: number;
 }
 
-export const RamoDisplay = ({ ramo }: { ramo: Ramo }) => {
-  // Estados posibles: 0 = pendiente, 1 = cursando, 2 = aprobado
-  const [estado, setEstado] = useState(0);
-
-  // Función para cambiar estado en orden circular
-  const cambiarEstado = () => {
-    setEstado((prev) => (prev + 1) % 3);
+export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: Ramo; onEstadoChange?: (nuevoEstado: 'pendiente' | 'cursando' | 'aprobado' | 'reprobado') => void }) => {
+  // Colores según estado
+  const getColor = (estado?: string) => {
+    switch (estado) {
+      case 'pendiente':
+        return "#393131ff"; // gris oscuro
+      case 'cursando':
+        return "#FFD700"; // amarillo
+      case 'aprobado':
+        return "#4CE48B"; // verde
+      case 'reprobado':
+        return "#FF4444"; // rojo
+      default:
+        return "#393131ff"; // gris oscuro por defecto
+    }
   };
 
-  // Colores según estado
-  const colores = ["#393131ff", "#FFD700", "#4CE48B"]; 
-  // gris oscuro, amarillo, verde
+  const cambiarEstado = () => {
+    if (!onEstadoChange) return;
+    
+    const estados: ('pendiente' | 'cursando' | 'aprobado' | 'reprobado')[] = ['pendiente', 'cursando', 'aprobado', 'reprobado'];
+    const estadoActual = ramo.estado || 'pendiente';
+    const indiceActual = estados.indexOf(estadoActual);
+    const nuevoEstado = estados[(indiceActual + 1) % estados.length];
+    onEstadoChange(nuevoEstado);
+  };
 
   return (
     <div
-      onClick={cambiarEstado}
+      onClick={onEstadoChange ? cambiarEstado : undefined}
       style={{
         padding: "12px",
         borderRadius: "12px",
-        backgroundColor: colores[estado],
-        cursor: "pointer",
+        backgroundColor: getColor(ramo.estado),
+        cursor: onEstadoChange ? "pointer" : "default",
         transition: "background-color 0.3s",
       }}
     >

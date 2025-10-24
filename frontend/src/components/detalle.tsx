@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosSecure from '../utils/axiosSecure';
 import type { DetallesRamo } from './ramo';
 
 export const DetalleDisplay = ({ ramo }: { ramo: DetallesRamo }) => {
@@ -37,14 +37,24 @@ export default function Detalle() {
 
   useEffect(() => {
     if (id) {
-      axios.get("http://localhost:3001/api/semestres")
+      axiosSecure.get("/api/semestres")
         .then(res => {
           const semestres = res.data;
           let cursoEncontrado = null;
           
           for (const semestre of semestres) {
-            cursoEncontrado = semestre.ramos.find((curso: DetallesRamo) => curso.id === parseInt(id));
-            if (cursoEncontrado) break;
+            const ramo = semestre.ramos.find((ramo: any) => ramo._id === id);
+            if (ramo) {
+              cursoEncontrado = {
+                id: ramo._id,
+                nombre: ramo.nombre,
+                codigo: ramo.codigo,
+                creditos: ramo.creditos,
+                descripcion: ramo.descripcion,
+                porcentajeAprobacion: ramo.porcentajeAprobacion
+              };
+              break;
+            }
           }
           setCurso(cursoEncontrado);
         })

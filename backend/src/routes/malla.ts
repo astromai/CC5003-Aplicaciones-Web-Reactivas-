@@ -1,6 +1,6 @@
 import express from 'express';
 import { withUser } from '../utils/middleware'; 
-import { createMalla, addRamoToSemestre, getMallaById } from '../controllers/mallaController';
+import { createMalla, addRamoToSemestre, getMallaById,  } from '../controllers/mallaController';
 
 const router = express.Router();
 

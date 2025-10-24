@@ -87,10 +87,8 @@ export const addRamoToSemestre = async (req: Request, res: Response, next: NextF
 
 // --- Función para OBTENER una malla por su ID ---
 export const getMallaById = async (req: Request, res: Response, next: NextFunction) => {
-
   // Intentamos obtener una malla por su ID
   try {
-
     // Obtenemos el ID de la malla desde la URL
     const { mallaId } = req.params;
 
@@ -109,6 +107,27 @@ export const getMallaById = async (req: Request, res: Response, next: NextFuncti
     res.status(200).json(malla);
 
   // Si algo sale mal, lo pasamos al manejador de errores.
+  } catch (error) {
+    next(error);
+  }
+};
+
+// --- Función para obtener la malla por defecto ---
+export const getDefaultMalla = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Buscamos la primera malla que exista en la base de datos
+    const defaultMalla = await Malla.findOne()
+      .populate({
+        path: 'semestres.ramos.ramo',
+        model: 'Ramo'
+      })
+      .exec();
+
+    if (!defaultMalla) {
+      return res.status(404).json({ error: 'No hay malla por defecto disponible' });
+    }
+
+    res.status(200).json(defaultMalla);
   } catch (error) {
     next(error);
   }
