@@ -1,34 +1,32 @@
 import { useState } from "react";
-import loginService from "../services/login";
-import type { User } from "../types/user";
+import { useUserStore } from "../stores/userStore";
 
 interface LoginProps {
-  onLoginSuccess: (user: User) => void;
   onShowRegister: () => void;
 }
 
-export default function Login({ onLoginSuccess, onShowRegister }: LoginProps) {
+export default function Login({ onShowRegister }: LoginProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login, isLoading, error } = useUserStore();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      const user = await loginService.login({
-        username,
-        password,
-      });
-      setUsername("");
-      setPassword("");
-      onLoginSuccess(user);
-    } catch (exception) {
-      console.error("Error en login:", exception);
-    }
+    await login({ username, password });
+    // Si el login sale bien, el store actualiza isAuthenticated, cambiando vista
+    setUsername("");
+    setPassword("");
   };
 
   return (
     <div>
+      {error && (
+        <div style={{ color: 'red', marginBottom: '10px' }}>
+          {error}
+        </div>
+      )}
+      
       <form onSubmit={handleLogin}>
         <div>
           <label>Usuario:</label>
@@ -36,6 +34,7 @@ export default function Login({ onLoginSuccess, onShowRegister }: LoginProps) {
             type="text"
             value={username}
             onChange={({ target }) => setUsername(target.value)}
+            disabled={isLoading}
           />
         </div>
         
@@ -45,14 +44,17 @@ export default function Login({ onLoginSuccess, onShowRegister }: LoginProps) {
             type="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
+            disabled={isLoading}
           />
         </div>
         
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          Login
+        </button>
       </form>
       
       <p>
-        ¿No tienes cuenta? <button type="button" onClick={onShowRegister}>Regístrate</button>
+        ¿No tienes cuenta? <button type="button" onClick={onShowRegister} disabled={isLoading}>Regístrate</button>
       </p>
     </div>
   );

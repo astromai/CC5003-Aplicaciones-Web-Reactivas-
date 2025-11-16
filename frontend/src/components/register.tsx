@@ -1,53 +1,53 @@
 import { useState } from "react";
-import loginService from "../services/login";
-import type { User } from "../types/user";
+import { useUserStore } from "../stores/userStore";
 
-interface RegisterProps {
-  onRegisterSuccess: (user: User) => void;
-}
-
-export default function Register({ onRegisterSuccess }: RegisterProps) {
+export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { register, isLoading, error } = useUserStore();
 
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      const user = await loginService.register({
-        username,
-        password,
-      });
-      setUsername("");
-      setPassword("");
-      onRegisterSuccess(user);
-    } catch (exception) {
-      console.error("Error en registro:", exception);
-    }
+    await register({ username, password });
+    // Si el registro es exitoso, el store hace login automático
+    setUsername("");
+    setPassword("");
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      <div>
-        <label>Usuario:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
+    <div>
+      {error && (
+        <div style={{ color: 'red', marginBottom: '10px' }}>
+          {error}
+        </div>
+      )}
       
-      <div>
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      
-      
-      <button type="submit">Registrarse</button>
-    </form>
+      <form onSubmit={handleRegister}>
+        <div>
+          <label>Usuario:</label>
+          <input
+            type="text"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+            disabled={isLoading}
+          />
+        </div>
+        
+        <div>
+          <label>Contraseña:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+            disabled={isLoading}
+          />
+        </div>
+        
+        <button type="submit" disabled={isLoading}>
+          Registrarse
+        </button>
+      </form>
+    </div>
   );
 }

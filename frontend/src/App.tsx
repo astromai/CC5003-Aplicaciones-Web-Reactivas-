@@ -4,27 +4,21 @@ import Malla from './components/malla'
 import Detalle from './components/detalle'
 import Login from './components/login'
 import Register from './components/register'
-import loginService from './services/login'
+import { useUserStore } from './stores/userStore'
 import './App.css'
-import {User} from './types/user'
 
 
 
 function App() {
-  const [user, setUser] = useState<User | null>(null)
+  const { user, isAuthenticated, restoreSession, logout } = useUserStore()
   const [showRegister, setShowRegister] = useState(false)
 
   useEffect(() => {
-    const init = async () => {
-      const user = await loginService.restoreLogin()
-      setUser(user)
-    }
-    init()
-  }, [])
+    restoreSession()
+  }, [restoreSession])
 
   const handleLogout = () => {
-    loginService.logout()
-    setUser(null)
+    logout()
     setShowRegister(false) // Volver a Login, no Register
   }
 
@@ -33,16 +27,16 @@ function App() {
       <div>
         <h1 style={{ textAlign: 'center', margin: 24 }}>Malla Curricular</h1>
         
-        {!user ? (
+        {!isAuthenticated ? (
           showRegister ? (
-            <Register onRegisterSuccess={setUser} />
+            <Register />
           ) : (
-            <Login onLoginSuccess={setUser} onShowRegister={() => setShowRegister(true)} />
+            <Login onShowRegister={() => setShowRegister(true)} />
           )
         ) : (
           <div>
             <p>
-              {user.username} logueado 
+              {user?.username} logueado 
               <button onClick={handleLogout}>
                 logout
               </button>
