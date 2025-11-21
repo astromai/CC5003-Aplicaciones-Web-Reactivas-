@@ -1,43 +1,12 @@
 import { Link } from "react-router-dom";
+import type { RamoBase, EstadoRamo } from '../types';
+import { ESTADO_COLOR, nextEstado } from '../types';
 
-export interface Ramo {
-  id: number;
-  nombre: string;
-  codigo: string;
-  creditos: number;
-  estado?: 'aprobado' | 'cursando' | 'reprobado' | 'pendiente';
-}
-
-export interface DetallesRamo extends Ramo {
-  descripcion: string;
-  porcentajeAprobacion: number;
-}
-
-export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: Ramo; onEstadoChange?: (nuevoEstado: 'pendiente' | 'cursando' | 'aprobado' | 'reprobado') => void }) => {
-  // Colores según estado
-  const getColor = (estado?: string) => {
-    switch (estado) {
-      case 'pendiente':
-        return "#393131ff"; // gris oscuro
-      case 'cursando':
-        return "#FFD700"; // amarillo
-      case 'aprobado':
-        return "#4CE48B"; // verde
-      case 'reprobado':
-        return "#FF4444"; // rojo
-      default:
-        return "#393131ff"; // gris oscuro por defecto
-    }
-  };
-
+export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: RamoBase; onEstadoChange?: (nuevoEstado: EstadoRamo) => void }) => {
   const cambiarEstado = () => {
     if (!onEstadoChange) return;
-    
-    const estados: ('pendiente' | 'cursando' | 'aprobado' | 'reprobado')[] = ['pendiente', 'cursando', 'aprobado', 'reprobado'];
-    const estadoActual = ramo.estado || 'pendiente';
-    const indiceActual = estados.indexOf(estadoActual);
-    const nuevoEstado = estados[(indiceActual + 1) % estados.length];
-    onEstadoChange(nuevoEstado);
+    const estadoActual: EstadoRamo = ramo.estado || 'pendiente';
+    onEstadoChange(nextEstado(estadoActual));
   };
 
   return (
@@ -46,14 +15,14 @@ export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: Ramo; onEstadoChan
       style={{
         padding: "12px",
         borderRadius: "12px",
-        backgroundColor: getColor(ramo.estado),
+        backgroundColor: ESTADO_COLOR[ramo.estado || 'pendiente'],
         cursor: onEstadoChange ? "pointer" : "default",
         transition: "background-color 0.3s",
       }}
     >
       <p>
         <strong>Nombre: </strong>
-        <Link to={`/curso/${ramo.id}`} onClick={(e) => e.stopPropagation()}style={{ color: 'inherit'}}>
+        <Link to={`/curso/${ramo.id}`} onClick={(e) => e.stopPropagation()} style={{ color: 'inherit'}}>
           {ramo.nombre}
         </Link>
       </p>

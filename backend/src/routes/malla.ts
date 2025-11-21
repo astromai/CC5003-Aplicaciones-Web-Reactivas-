@@ -1,12 +1,22 @@
 import express from 'express';
 import { withUser } from '../utils/middleware'; 
-import { createMalla, addRamoToSemestre, getMallaById,  } from '../controllers/mallaController';
+import { 
+  createMalla, 
+  getMallasUsuario,
+  getMallaById, 
+  addRamoToSemestre, 
+  updateEstadoRamo,
+  deleteMalla 
+} from '../controllers/mallaController';
 
 const router = express.Router();
 
 // --- Definición de Rutas para Mallas ---
 router.post('/', withUser, createMalla); 
-router.post('/:mallaId/ramos', withUser, addRamoToSemestre);
+router.get('/', withUser, getMallasUsuario);
 router.get('/:mallaId', withUser, getMallaById);
+router.delete('/:mallaId', withUser, deleteMalla);
+router.post('/:mallaId/semestres/:numero/ramos', withUser, addRamoToSemestre);
+router.patch('/:mallaId/ramos/:ramoId', withUser, updateEstadoRamo);
 
 export default router;

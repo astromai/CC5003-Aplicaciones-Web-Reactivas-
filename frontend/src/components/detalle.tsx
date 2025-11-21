@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axiosSecure from '../utils/axiosSecure';
-import type { DetallesRamo } from './ramo';
+import type { RamoDetalle } from '../types';
+import { getRamoById } from '../services/ramoService';
 
-export const DetalleDisplay = ({ ramo }: { ramo: DetallesRamo }) => {
+export const DetalleDisplay = ({ ramo }: { ramo: RamoDetalle }) => {
   return (
     <div style={{ padding: 8 }}>
       <p>
@@ -33,40 +33,55 @@ export const DetalleDisplay = ({ ramo }: { ramo: DetallesRamo }) => {
 export default function Detalle() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [curso, setCurso] = useState<DetallesRamo | null>(null);
+  const [curso, setCurso] = useState<RamoDetalle | null>(null);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (id) {
-      axiosSecure.get("/api/semestres")
-        .then(res => {
-          const semestres = res.data;
-          let cursoEncontrado = null;
-          
-          for (const semestre of semestres) {
-            const ramo = semestre.ramos.find((ramo: any) => ramo._id === id);
-            if (ramo) {
-              cursoEncontrado = {
-                id: ramo._id,
-                nombre: ramo.nombre,
-                codigo: ramo.codigo,
-                creditos: ramo.creditos,
-                descripcion: ramo.descripcion,
-                porcentajeAprobacion: ramo.porcentajeAprobacion
-              };
-              break;
-            }
-          }
-          setCurso(cursoEncontrado);
-        })
-        .catch(err => console.error(err));
-    }
+    let cancelled = false;
+    const fetchRamo = async () => {
+      if (!id) return;
+      setLoading(true);
+      setError(null);
+      try {
+        const ramo = await getRamoById(id);
+        if (!cancelled) {
+          setCurso(ramo);
+        }
+      } catch (e: any) {
+        if (!cancelled) {
+          setError(e.response?.data?.error || 'No se pudo cargar el ramo');
+          setCurso(null);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    fetchRamo();
+    return () => { cancelled = true; };
   }, [id]);
 
-  if (!curso) {
+  if (loading) {
     return (
-      <div>
-        <h2>Curso no encontrado.</h2>
-        <button onClick={() => navigate('/')}>Volver a la malla</button>
+      <div style={{ padding: 24, textAlign: 'center', color: 'white' }}>
+        Cargando detalles...
+      </div>
+    );
+  }
+
+  if (error || !curso) {
+    return (
+      <div style={{ padding: 24, textAlign: 'center' }}>
+        <h2 style={{ color: '#ff6b6b' }}>{error || 'Curso no encontrado'}</h2>
+        <button onClick={() => navigate(-1)} style={{
+          padding: '10px 20px',
+          borderRadius: '8px',
+          border: 'none',
+          backgroundColor: '#4e6269ff',
+          color: 'white',
+          cursor: 'pointer'
+        }}>Volver</button>
       </div>
     );
   }
@@ -74,7 +89,14 @@ export default function Detalle() {
   return (
     <div style={{ padding: 24 }}>
       <DetalleDisplay ramo={curso} />
-      <button onClick={() => navigate('/')} style={{backgroundColor:'#4e6269ff'}}> Volver a la malla</button>
+      <button onClick={() => navigate(-1)} style={{
+        backgroundColor:'#4e6269ff',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '8px',
+        color: 'white',
+        cursor: 'pointer'
+      }}>Volver</button>
       
     </div>
   );

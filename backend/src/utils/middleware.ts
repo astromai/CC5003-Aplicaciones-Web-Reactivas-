@@ -52,6 +52,10 @@ const errorHandler = (
   next(error);
 };
 
+export interface DecodedToken {
+  id: string;
+  csrf: string;
+}
 
 export const withUser = async (
   req: Request,
@@ -59,7 +63,7 @@ export const withUser = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const authReq = req;
+    const authReq = req as Request & { user?: DecodedToken };
     const token = req.cookies?.token;
     if (!token) {
       res.status(401).json({ error: "missing token" });
@@ -71,7 +75,7 @@ export const withUser = async (
         decodedToken.id &&
         decodedToken.csrf === csrfToken
       ) {
-        authReq.userId = decodedToken.id;
+        authReq.user = { id: decodedToken.id, csrf: decodedToken.csrf };
         next();
       } else {
         res.status(401).json({ error: "invalid token" });

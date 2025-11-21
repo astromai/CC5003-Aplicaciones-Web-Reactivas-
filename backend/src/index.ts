@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import config from "./utils/config";
-import semestreRoutes from './routes/semestres';
 import ramoRoutes from './routes/ramos';
 import mallaRoutes from './routes/malla'; 
 import userRoutes from './routes/user'
@@ -48,7 +47,6 @@ const requestLogger = (
 app.use(requestLogger);
 
 // --- Rutas de la API ---
-app.use("/api/semestres", semestreRoutes);
 app.use("/api/ramos", ramoRoutes);
 app.use("/api/mallas", mallaRoutes); 
 app.use("/api/user", userRoutes);
@@ -72,15 +70,6 @@ const errorHandler = (
   response.status(500).json({ error: "Oops! Algo salió mal en el servidor" });
 };
 app.use(errorHandler);
-
-// -- Tipado personalizado para Express Request ---
-declare global {
-  namespace Express {
-    interface Request {
-      userId?: string;
-    }
-  }
-}
 
 // --- Iniciar Servidor ---
 const PORT = config.PORT;

@@ -1,9 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import Malla from './components/malla'
+import MallaView from './components/malla'
 import Detalle from './components/detalle'
 import Login from './components/login'
 import Register from './components/register'
+import ListaMallas from './components/listaMallas'
+import CrearMalla from './components/crearMalla'
 import { useUserStore } from './stores/userStore'
 import './App.css'
 
@@ -19,7 +21,7 @@ function App() {
 
   const handleLogout = () => {
     logout()
-    setShowRegister(false) // Volver a Login, no Register
+    setShowRegister(false)
   }
 
   return (
@@ -35,14 +37,17 @@ function App() {
           )
         ) : (
           <div>
-            <p>
+            <p style={{ textAlign: 'center', marginBottom: '20px' }}>
               {user?.username} logueado 
-              <button onClick={handleLogout}>
+              <button onClick={handleLogout} style={{ marginLeft: '12px' }}>
                 logout
               </button>
             </p>
             <Routes>
-              <Route path="/" element={<Malla />} />
+              <Route path="/" element={<Navigate to="/mis-mallas" replace />} />
+              <Route path="/mis-mallas" element={<ListaMallas />} />
+              <Route path="/crear-malla" element={<CrearMalla />} />
+              <Route path="/malla/:mallaId" element={<MallaView />} />
               <Route path="/curso/:id" element={<Detalle />} />
             </Routes>
           </div>

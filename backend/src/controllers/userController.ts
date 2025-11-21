@@ -4,6 +4,7 @@ import crypto from "crypto";
 import { Request, Response, NextFunction } from 'express';
 import User from "../models/User";
 import config from "../utils/config";
+import type { DecodedToken } from '../utils/middleware';
 
 // --- Función para LOGIN ---
 export const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -84,8 +85,14 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 // --- Función para ME ---
 export const me = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
+    
+    if (!userId) {
+      return res.status(401).json({ error: "No autenticado" });
+    }
+
     // Buscamos el usuario en la base de datos usando el ID del token
-    const user = await User.findById(req.userId);
+    const user = await User.findById(userId);
     
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });

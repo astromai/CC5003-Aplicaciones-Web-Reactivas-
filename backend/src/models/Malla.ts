@@ -10,26 +10,29 @@ const ramoCursadoSchema = new mongoose.Schema({
   estado: { 
     type: String, 
     enum: ['aprobado', 'cursando', 'reprobado', 'pendiente'],
-    required: true 
+    required: true,
+    default: 'pendiente'
   }
-});
+}, { _id: false });
 
 // --- SCHEMA DE SEMESTRE EN LA MALLA ---
 const semestreEnMallaSchema = new mongoose.Schema({
-  titulo: { type: String, required: true },
+  numero: { type: Number, required: true },
   ramos: [ramoCursadoSchema] 
-});
+}, { _id: false });
 
 
 // --- EL SCHEMA PRINCIPAL DE LA MALLA ---
 const mallaSchema = new mongoose.Schema({
-  nombre: { type: String, required: true, default: 'Mi Malla' },
+  nombre: { type: String, required: true },
   usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   semestres: [semestreEnMallaSchema]
-});
+}, { timestamps: true });
 
-// --- EL MODELO DE LA MALLA ---
-const MallaModel = mongoose.model("Malla", mallaSchema);
+// Índice para búsquedas rápidas por usuario
+mallaSchema.index({ usuario: 1 });
+
+// --- CONFIGURACIÓN DEL SCHEMA ---
 mallaSchema.set("toJSON", {
   transform: (returnedObject: { id?: string, _id?: mongoose.Types.ObjectId, __v?: number }) => {
     returnedObject.id = returnedObject._id?.toString();
@@ -37,5 +40,8 @@ mallaSchema.set("toJSON", {
     delete returnedObject.__v;
   },
 });
+
+// --- EL MODELO DE LA MALLA ---
+const MallaModel = mongoose.model("Malla", mallaSchema);
 
 export default MallaModel;

@@ -1,85 +1,99 @@
 import { Request, Response, NextFunction } from 'express';
-
 import Malla from '../models/Malla';
+import type { DecodedToken } from '../utils/middleware';
 
 // --- Función para CREAR una nueva Malla ---
 export const createMalla = async (req: Request, res: Response, next: NextFunction) => {
-
-  // Intentamos crear una nueva malla
   try {
+    const { nombre, numSemestres } = req.body;
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
 
-    // Obtenemos el nombre de la malla desde el body
-    const { nombre } = req.body;
-
-    // Verificamos que tengamos el nombre de la malla, y retornamos un error si no lo tenemos.
-    if (!nombre) {
-      return res.status(400).json({ error: 'El nombre de la malla es requerido' });
+    if (!nombre || !numSemestres) {
+      return res.status(400).json({ error: 'Se requiere nombre y número de semestres' });
     }
 
-    // Creamos una nueva instancia del modelo Malla, con el nombre y semestres vacíos.
+    if (!userId) {
+      return res.status(401).json({ error: 'Usuario no autenticado' });
+    }
+
+    // Crear array de semestres vacíos
+    const semestres = Array.from({ length: numSemestres }, (_, i) => ({
+      numero: i + 1,
+      ramos: []
+    }));
+
     const nuevaMalla = new Malla({
-      nombre: nombre,
-      semestres: [] 
+      nombre,
+      usuario: userId,
+      semestres
     });
 
-    // Guardamos la nueva malla en la base de datos.
     await nuevaMalla.save();
-
-    // Enviamos la malla recién creada de vuelta al frontend.
     res.status(201).json(nuevaMalla);
 
   } catch (error) {
-    // Si algo sale mal, lo pasamos al manejador de errores.
+    next(error);
+  }
+};
+
+// --- Función para LISTAR mallas del usuario ---
+export const getMallasUsuario = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
+
+    if (!userId) {
+      return res.status(401).json({ error: 'Usuario no autenticado' });
+    }
+
+    const mallas = await Malla.find({ usuario: userId });
+    res.json(mallas);
+
+  } catch (error) {
     next(error);
   }
 };
 
 // --- Función para AÑADIR un ramo a un semestre de una malla ---
 export const addRamoToSemestre = async (req: Request, res: Response, next: NextFunction) => {
-
-  // Intentamos añadir un ramo a un semestre de una malla
   try {
+    const { mallaId, numero } = req.params;
+    const { ramoId, estado } = req.body;
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
 
-    // Obtenemos los IDs y datos de la URL y el body
-    const { mallaId } = req.params; // El ID de la malla que queremos modificar
-    const { tituloSemestre, ramoId, estado } = req.body; // Los datos del ramo a añadir
-
-    // Verificamos que tengamos toda la información necesaria, y retornamos un error si no la tenemos.
-    if (!tituloSemestre || !ramoId || !estado) {
-      return res.status(400).json({ error: 'Faltan datos: se requiere tituloSemestre, ramoId y estado' });
+    if (!ramoId || !estado) {
+      return res.status(400).json({ error: 'Se requiere ramoId y estado' });
     }
 
-    // Buscamos la malla en la base de datos.
-    const malla = await Malla.findById(mallaId);
+    const malla = await Malla.findOne({ _id: mallaId, usuario: userId });
 
-    // Si no se encuentra, retornamos un error 404.
     if (!malla) {
       return res.status(404).json({ error: 'Malla no encontrada' });
     }
 
-    // Buscamos si el semestre ya existe en la malla.
-    let semestre = malla.semestres.find(s => s.titulo === tituloSemestre);
+    const semestreNum = parseInt(numero);
+    const semestre = malla.semestres.find(s => s.numero === semestreNum);
 
-    // Si el semestre NO existe, lo creamos.
     if (!semestre) {
-
-      // Creamos el semestre y lo agregamos a la malla.
-      malla.semestres.push({ titulo: tituloSemestre, ramos: [] });
-
-      // Obtenemos el semestre recién creado.
-      semestre = malla.semestres[malla.semestres.length - 1]; // Lo asignamos a nuestra variable.
+      return res.status(404).json({ error: 'Semestre no encontrado' });
     }
 
-    // Añadimos el nuevo ramo y su estado al semestre.
-    semestre.ramos.push({ ramo: ramoId, estado: estado });
+    // Verificar si el ramo ya existe en este semestre
+    const ramoExistente = semestre.ramos.find(r => r.ramo.toString() === ramoId);
+    if (ramoExistente) {
+      return res.status(400).json({ error: 'El ramo ya existe en este semestre' });
+    }
 
-    // Guardamos la malla actualizada en la base de datos.
-    const mallaActualizada = await malla.save();
+    semestre.ramos.push({ ramo: ramoId, estado });
+    await malla.save();
 
-    // Enviamos la malla completa y actualizada de vuelta.
-    res.status(200).json(mallaActualizada);
+    // Poblar ramos para devolverlos completos
+    const mallaPopulated = await Malla.findById(mallaId).populate({
+      path: 'semestres.ramos.ramo',
+      model: 'Ramo'
+    });
 
-  // Si algo sale mal, lo pasamos al manejador de errores.
+    res.status(200).json(mallaPopulated);
+
   } catch (error) {
     next(error);
   }
@@ -87,47 +101,86 @@ export const addRamoToSemestre = async (req: Request, res: Response, next: NextF
 
 // --- Función para OBTENER una malla por su ID ---
 export const getMallaById = async (req: Request, res: Response, next: NextFunction) => {
-  // Intentamos obtener una malla por su ID
   try {
-    // Obtenemos el ID de la malla desde la URL
     const { mallaId } = req.params;
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
 
-    // Buscamos la malla en la base de datos
-    const malla = await Malla.findById(mallaId).populate({
-      path: 'semestres.ramos.ramo', // La ruta anidada que queremos poblar
-      model: 'Ramo'                // El modelo que debe usar para poblar
+    const malla = await Malla.findOne({ _id: mallaId, usuario: userId }).populate({
+      path: 'semestres.ramos.ramo',
+      model: 'Ramo'
     });
 
-    // Si no se encuentra, enviamos un error 404.
     if (!malla) {
       return res.status(404).json({ error: 'Malla no encontrada' });
     }
 
-    // Si se encuentra, la enviamos al frontend.
     res.status(200).json(malla);
 
-  // Si algo sale mal, lo pasamos al manejador de errores.
   } catch (error) {
     next(error);
   }
 };
 
-// --- Función para obtener la malla por defecto ---
-export const getDefaultMalla = async (req: Request, res: Response, next: NextFunction) => {
+// --- Función para ACTUALIZAR estado de un ramo ---
+export const updateEstadoRamo = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Buscamos la primera malla que exista en la base de datos
-    const defaultMalla = await Malla.findOne()
-      .populate({
-        path: 'semestres.ramos.ramo',
-        model: 'Ramo'
-      })
-      .exec();
+    const { mallaId, ramoId } = req.params;
+    const { estado } = req.body;
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
 
-    if (!defaultMalla) {
-      return res.status(404).json({ error: 'No hay malla por defecto disponible' });
+    if (!estado) {
+      return res.status(400).json({ error: 'Se requiere el estado' });
     }
 
-    res.status(200).json(defaultMalla);
+    const malla = await Malla.findOne({ _id: mallaId, usuario: userId });
+
+    if (!malla) {
+      return res.status(404).json({ error: 'Malla no encontrada' });
+    }
+
+    // Buscar el ramo en todos los semestres
+    let ramoEncontrado = false;
+    for (const semestre of malla.semestres) {
+      const ramo = semestre.ramos.find(r => r.ramo.toString() === ramoId);
+      if (ramo) {
+        ramo.estado = estado;
+        ramoEncontrado = true;
+        break;
+      }
+    }
+
+    if (!ramoEncontrado) {
+      return res.status(404).json({ error: 'Ramo no encontrado en la malla' });
+    }
+
+    await malla.save();
+
+    const mallaPopulated = await Malla.findById(mallaId).populate({
+      path: 'semestres.ramos.ramo',
+      model: 'Ramo'
+    });
+
+    res.status(200).json(mallaPopulated);
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+// --- Función para ELIMINAR una malla ---
+export const deleteMalla = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { mallaId } = req.params;
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
+
+    const malla = await Malla.findOneAndDelete({ _id: mallaId, usuario: userId });
+
+    if (!malla) {
+      return res.status(404).json({ error: 'Malla no encontrada' });
+    }
+
+    res.status(200).json({ message: 'Malla eliminada correctamente' });
+
   } catch (error) {
     next(error);
   }
