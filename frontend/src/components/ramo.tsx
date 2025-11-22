@@ -1,40 +1,60 @@
 import { Link } from "react-router-dom";
 import type { RamoBase, EstadoRamo } from '../types';
-import { ESTADO_COLOR, nextEstado } from '../types';
+import { nextEstado } from '../types';
+
+// Mapeo: Estado -> Clase CSS (definida en index.css)
+const estadoClases: Record<string, string> = {
+  pendiente: "ramo-pendiente",
+  cursando: "ramo-cursando",
+  aprobado: "ramo-aprobado",
+  reprobado: "ramo-reprobado",
+};
 
 export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: RamoBase; onEstadoChange?: (nuevoEstado: EstadoRamo) => void }) => {
+  // Aseguramos un estado por defecto
+  const estadoActual = ramo.estado || 'pendiente';
+
   const cambiarEstado = () => {
     if (!onEstadoChange) return;
-    const estadoActual: EstadoRamo = ramo.estado || 'pendiente';
-    onEstadoChange(nextEstado(estadoActual));
+    onEstadoChange(nextEstado(estadoActual as EstadoRamo));
   };
 
   return (
     <div
       onClick={onEstadoChange ? cambiarEstado : undefined}
-      style={{
-        padding: "12px",
-        borderRadius: "12px",
-        backgroundColor: ESTADO_COLOR[ramo.estado || 'pendiente'],
-        cursor: onEstadoChange ? "pointer" : "default",
-        transition: "background-color 0.3s",
-      }}
+      className={`ramo-card group ${estadoClases[estadoActual]} ${onEstadoChange ? 'cursor-pointer' : 'cursor-default'}`}
     >
-      <p>
-        <strong> </strong>
-        <Link to={`/curso/${ramo.id}`} onClick={(e) => e.stopPropagation()} style={{ color: 'inherit'}}>
+      {/* Cabecera: Código y Créditos */}
+      <div className="flex justify-between items-start">
+        <span className="ramo-codigo">
+          {ramo.codigo}
+        </span>
+        <span className="ramo-badge">
+          {ramo.creditos} CR
+        </span>
+      </div>
+
+      {/* Cuerpo: Nombre del Ramo (Link) */}
+      <div className="flex-1 flex items-center">
+        <Link 
+          to={`/curso/${ramo.id}`} 
+          onClick={(e) => e.stopPropagation()} 
+          className="ramo-titulo"
+        >
           {ramo.nombre}
         </Link>
-      </p>
-      <p>
-        <strong>Código: </strong>
-        {ramo.codigo}
-      </p>
-      <p>
-        <strong>Créditos: </strong>
-        {ramo.creditos}
-      </p>
+      </div>
+
+      {/* Pie: Indicador visual de estado (Barra de progreso decorativa) */}
+      <div className="w-full h-1 bg-black/20 rounded-full overflow-hidden">
+        <div 
+          className={`h-full transition-all duration-500 ${
+            estadoActual === 'aprobado' ? 'bg-emerald-400 w-full' :
+            estadoActual === 'cursando' ? 'bg-blue-400 w-1/2 animate-pulse' :
+            estadoActual === 'reprobado' ? 'bg-red-400 w-full' : 'w-0'
+          }`}
+        />
+      </div>
     </div>
   );
 };
-
