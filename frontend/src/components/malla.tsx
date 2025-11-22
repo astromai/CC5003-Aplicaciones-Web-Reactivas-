@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import SemestreDisplay from "./semestre"; 
 import { getMallaById, actualizarEstadoRamo, eliminarRamoDeSemestre } from '../services/mallaService';
-import AgregarRamoWizard from './AgregarRamoWizard';
+import AgregarRamo from './AgregarRamo';
 import type { Malla, EstadoRamo } from '../types';
 
 export default function MallaView() {
@@ -11,7 +11,7 @@ export default function MallaView() {
   const [malla, setMalla] = useState<Malla | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [showWizard, setShowWizard] = useState(false);
+  const [showAgregar, setShowAgregar] = useState(false);
   const [semestreSeleccionado, setSemestreSeleccionado] = useState<number | null>(null);
 
   useEffect(() => {
@@ -79,18 +79,18 @@ export default function MallaView() {
               numero={sem.numero}
               ramos={sem.ramos} 
               onRamoEstadoChange={handleRamoEstadoChange}
-              onAgregarRamo={(num) => { setSemestreSeleccionado(num); setShowWizard(true); }}
+              onAgregarRamo={(num) => { setSemestreSeleccionado(num); setShowAgregar(true); }}
               onEliminarRamo={handleEliminarRamo}
             />
           ))}
         </div>
       </div>
 
-      {showWizard && semestreSeleccionado && (
-        <AgregarRamoWizard
+      {showAgregar && semestreSeleccionado && (
+        <AgregarRamo
           mallaId={mallaId!}
           semestreNumero={semestreSeleccionado}
-          onClose={() => { setShowWizard(false); setSemestreSeleccionado(null); }}
+          onClose={() => { setShowAgregar(false); setSemestreSeleccionado(null); }}
           onAdded={(m) => setMalla(m)}
         />
       )}

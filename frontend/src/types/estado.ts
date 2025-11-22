@@ -1,6 +1,6 @@
-export type EstadoRamo = 'pendiente' | 'cursando' | 'aprobado' | 'reprobado';
+export type EstadoRamo = 'Pendiente' | 'Cursando' | 'Aprobado' | 'Reprobado';
 
-export const ESTADO_ORDER: EstadoRamo[] = ['pendiente', 'cursando', 'aprobado', 'reprobado'];
+export const ESTADO_ORDER: EstadoRamo[] = ['Pendiente', 'Cursando', 'Aprobado', 'Reprobado'];
 
 export function nextEstado(actual: EstadoRamo): EstadoRamo {
   const idx = ESTADO_ORDER.indexOf(actual);
@@ -8,8 +8,8 @@ export function nextEstado(actual: EstadoRamo): EstadoRamo {
 }
 
 export const ESTADO_COLOR: Record<EstadoRamo, string> = {
-  pendiente: '#393131ff',
-  cursando: '#FFD700',
-  aprobado: '#4CE48B',
-  reprobado: '#FF4444'
+  Pendiente: '#393131ff',
+  Cursando: '#FFD700',
+  Aprobado: '#4CE48B',
+  Reprobado: '#FF4444'
 };
