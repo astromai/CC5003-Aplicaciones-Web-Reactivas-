@@ -6,6 +6,7 @@ export default function CrearMalla() {
   const [nombre, setNombre] = useState('');
   const [numSemestres, setNumSemestres] = useState(8);
   const [loading, setLoading] = useState(false);
+  const [usarBase, setUsarBase] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export default function CrearMalla() {
     setError(null);
 
     try {
-      const nuevaMalla = await crearMalla(nombre, numSemestres);
+      const nuevaMalla = await crearMalla(nombre, numSemestres, usarBase);
       navigate(`/malla/${nuevaMalla.id}`);
     } catch (err: any) {
       console.error('Error al crear malla:', err);
@@ -78,19 +79,24 @@ export default function CrearMalla() {
             type="number"
             min="1"
             max="20"
-            value={numSemestres}
+            value={usarBase ? 11 : numSemestres}
             onChange={(e) => setNumSemestres(parseInt(e.target.value))}
             style={{
               width: '100%',
               padding: '10px',
               borderRadius: '8px',
               border: '1px solid #444',
-              backgroundColor: '#1a1a1a',
+              backgroundColor: usarBase ? '#333' : '#1a1a1a',
               color: 'white',
               fontSize: '16px'
             }}
-            disabled={loading}
+            disabled={loading || usarBase}
           />
+          {usarBase && (
+            <p style={{ color: '#ccc', marginTop: 6, fontSize: 13 }}>
+              La malla ideal siempre usa 11 semestres.
+            </p>
+          )}
         </div>
 
         {error && (
@@ -104,6 +110,20 @@ export default function CrearMalla() {
             {error}
           </div>
         )}
+
+        <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <input
+            id="usarBase"
+            type="checkbox"
+            checked={usarBase}
+            onChange={(e) => { const checked = e.target.checked; setUsarBase(checked); if (checked) setNumSemestres(11); }}
+            disabled={loading}
+            style={{ width: 18, height: 18, cursor: 'pointer' }}
+          />
+          <label htmlFor="usarBase" style={{ color: 'white', cursor: 'pointer', userSelect: 'none' }}>
+            Iniciar con malla ideal (plan base sugerido)
+          </label>
+        </div>
 
         <div style={{ display: 'flex', gap: '12px' }}>
           <button

@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import Malla from '../models/Malla';
+import Ramo from '../models/Ramo';
+import fs from 'fs';
+import path from 'path';
 import type { DecodedToken } from '../utils/middleware';
 
 // --- Función para CREAR una nueva Malla ---
 export const createMalla = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { nombre, numSemestres } = req.body;
+    const { nombre, numSemestres, usarBase } = req.body;
     const userId = (req as Request & { user?: DecodedToken }).user?.id;
 
     if (!nombre || !numSemestres) {
@@ -16,17 +19,47 @@ export const createMalla = async (req: Request, res: Response, next: NextFunctio
       return res.status(401).json({ error: 'Usuario no autenticado' });
     }
 
-    // Crear array de semestres vacíos
-    const semestres = Array.from({ length: numSemestres }, (_, i) => ({
-      numero: i + 1,
-      ramos: []
-    }));
+    let semestres: { numero: number; ramos: { ramo: any; estado: string }[] }[] = [];
+    let cantidadSemestres = numSemestres;
 
-    const nuevaMalla = new Malla({
-      nombre,
-      usuario: userId,
-      semestres
-    });
+    if (usarBase) {
+      try {
+        const plantillaPath = path.resolve(__dirname, '../../Scripts/db.json');
+        const raw = fs.readFileSync(plantillaPath, 'utf-8');
+        const data = JSON.parse(raw);
+        const semestresPlantilla = data.semestres || [];
+        // Filtrar solo semestres reales (titulo "Semestre N"), ignorando bloques como "Electivos Disponibles"
+        const semestresValidos = semestresPlantilla.filter((s: any) => {
+          const t = s.titulo;
+          return typeof t === 'string' && /^Semestre\s+\d+$/i.test(t);
+        }).slice(0, 11); // Asegurar máximo 11 semestres
+        cantidadSemestres = semestresValidos.length;
+        // Mapear códigos a IDs de ramos ya cargados en la colección
+        const todosRamos = await Ramo.find();
+        const mapaPorCodigo = new Map<string, any>();
+        todosRamos.forEach(r => mapaPorCodigo.set(r.codigo, r._id));
+
+        // Construir semestres directamente desde plantilla
+        semestres = semestresValidos.map((plantillaSem: any, index: number) => {
+          const ramosConvertidos = (plantillaSem.ramos || [])
+            .map((r: any) => ({ codigo: r.codigo }))
+            .map((r: { codigo: string }) => mapaPorCodigo.get(r.codigo))
+            .filter((id: any) => !!id)
+            .map((id: any) => ({ ramo: id, estado: 'pendiente' }));
+          return { numero: index + 1, ramos: ramosConvertidos };
+        });
+      } catch (e) {
+        console.error('Error cargando plantilla base:', e);
+        // Si falla, revertir a semestres vacíos con numSemestres original
+        cantidadSemestres = numSemestres;
+        semestres = Array.from({ length: cantidadSemestres }, (_, i) => ({ numero: i + 1, ramos: [] }));
+      }
+    } else {
+      // Semestres vacíos sin plantilla
+      semestres = Array.from({ length: cantidadSemestres }, (_, i) => ({ numero: i + 1, ramos: [] }));
+    }
+
+    const nuevaMalla = new Malla({ nombre, usuario: userId, semestres });
 
     await nuevaMalla.save();
     res.status(201).json(nuevaMalla);
@@ -181,6 +214,43 @@ export const deleteMalla = async (req: Request, res: Response, next: NextFunctio
 
     res.status(200).json({ message: 'Malla eliminada correctamente' });
 
+  } catch (error) {
+    next(error);
+  }
+};
+
+// --- Función para ELIMINAR un ramo específico de un semestre ---
+export const removeRamoFromSemestre = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { mallaId, numero, ramoId } = req.params;
+    const userId = (req as Request & { user?: DecodedToken }).user?.id;
+
+    const semestreNum = parseInt(numero);
+
+    const malla = await Malla.findOne({ _id: mallaId, usuario: userId });
+    if (!malla) {
+      return res.status(404).json({ error: 'Malla no encontrada' });
+    }
+
+    const semestre = malla.semestres.find(s => s.numero === semestreNum);
+    if (!semestre) {
+      return res.status(404).json({ error: 'Semestre no encontrado' });
+    }
+
+    const index = semestre.ramos.findIndex(r => r.ramo.toString() === ramoId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Ramo no encontrado en el semestre' });
+    }
+
+    semestre.ramos.splice(index, 1);
+    await malla.save();
+
+    const mallaPopulated = await Malla.findById(mallaId).populate({
+      path: 'semestres.ramos.ramo',
+      model: 'Ramo'
+    });
+
+    res.status(200).json(mallaPopulated);
   } catch (error) {
     next(error);
   }

@@ -3,116 +3,155 @@
     {
       "titulo": "Semestre 1",
       "ramos": [
-        { "nombre": "Introducción al Cálculo", "codigo": "MA1001", "creditos": 6, "descripcion": "Fundamentos de cálculo diferencial e integral", "porcentajeAprobacion": 80 },
-        { "nombre": "Introducción al Álgebra", "codigo": "MA1101", "creditos": 6, "descripcion": "Álgebra lineal y abstracción matemática básica", "porcentajeAprobacion": 80 },
-        { "nombre": "Introducción a la Física Clásica", "codigo": "FI1000", "creditos": 6, "descripcion": "Principios fundamentales de la física clásica", "porcentajeAprobacion": 80 },
-        { "nombre": "Herramientas Computacionales", "codigo": "CC1000", "creditos": 3, "descripcion": "Introducción a herramientas computacionales para ingeniería", "porcentajeAprobacion": 80 },
-        { "nombre": "Desafíos de Innovación", "codigo": "CD1100", "creditos": 6, "descripcion": "Metodologías de innovación y diseño", "porcentajeAprobacion": 80 },
-        { "nombre": "Aplicaciones de la Biología a la Ingeniería", "codigo": "BT1211", "creditos": 3, "descripcion": "Biología aplicada a problemas de ingeniería", "porcentajeAprobacion": 80 }
+        { "nombre": "Introducción al Cálculo", "codigo": "MA1001", "creditos": 6, "descripcion": "Fundamentos de cálculo diferencial e integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Introducción al Álgebra", "codigo": "MA1101", "creditos": 6, "descripcion": "Álgebra lineal y abstracción matemática básica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Introducción a la Física Clásica", "codigo": "FI1000", "creditos": 6, "descripcion": "Principios fundamentales de la física clásica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Herramientas Computacionales", "codigo": "CC1000", "creditos": 3, "descripcion": "Introducción a herramientas computacionales para ingeniería", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Computación" },
+        { "nombre": "Desafíos de Innovación", "codigo": "CD1100", "creditos": 6, "descripcion": "Metodologías de innovación y diseño", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
+        { "nombre": "Aplicaciones de la Biología a la Ingeniería", "codigo": "BT1211", "creditos": 3, "descripcion": "Biología aplicada a problemas de ingeniería", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Biología" }
       ]
     },
     {
       "titulo": "Semestre 2",
       "ramos": [
-        { "nombre": "Cálculo Diferencial e Integral", "codigo": "MA1002", "creditos": 6, "descripcion": "Cálculo en una variable real", "porcentajeAprobacion": 80 },
-        { "nombre": "Álgebra Lineal", "codigo": "MA1102", "creditos": 6, "descripcion": "Espacios vectoriales y transformaciones lineales", "porcentajeAprobacion": 80 },
-        { "nombre": "Introducción a la Física Moderna", "codigo": "FI1100", "creditos": 6, "descripcion": "Física cuántica y relatividad especial", "porcentajeAprobacion": 80 },
-        { "nombre": "Introducción a la Programación", "codigo": "CC1002", "creditos": 6, "descripcion": "Fundamentos de programación en Python", "porcentajeAprobacion": 80 },
-        { "nombre": "Proyecto de Innovación de Ingeniería y Ciencias", "codigo": "CD1201", "creditos": 3, "descripcion": "Desarrollo de proyecto interdisciplinario de innovación", "porcentajeAprobacion": 80 },
-        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH1", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80 }
+        { "nombre": "Cálculo Diferencial e Integral", "codigo": "MA1002", "creditos": 6, "descripcion": "Cálculo en una variable real", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Álgebra Lineal", "codigo": "MA1102", "creditos": 6, "descripcion": "Espacios vectoriales y transformaciones lineales", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Introducción a la Física Moderna", "codigo": "FI1100", "creditos": 6, "descripcion": "Física cuántica y relatividad especial", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Introducción a la Programación", "codigo": "CC1002", "creditos": 6, "descripcion": "Fundamentos de programación en Python", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Computación" },
+        { "nombre": "Proyecto de Innovación de Ingeniería y Ciencias", "codigo": "CD1201", "creditos": 3, "descripcion": "Desarrollo de proyecto interdisciplinario de innovación", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
+        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH1", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" }
       ]
     },
     {
       "titulo": "Semestre 3",
       "ramos": [
-        { "nombre": "Cálculo en Varias Variables", "codigo": "MA2001", "creditos": 6, "descripcion": "Cálculo multivariable y optimización", "porcentajeAprobacion": 80 },
-        { "nombre": "Ecuaciones Diferenciales Ordinarias", "codigo": "MA2601", "creditos": 6, "descripcion": "Resolución de ecuaciones diferenciales ordinarias", "porcentajeAprobacion": 80 },
-        { "nombre": "Mecánica", "codigo": "FI2001", "creditos": 6, "descripcion": "Mecánica clásica y dinámica", "porcentajeAprobacion": 80 },
-        { "nombre": "Métodos Experimentales", "codigo": "FI2003", "creditos": 6, "descripcion": "Técnicas experimentales en física", "porcentajeAprobacion": 80 },
-        { "nombre": "Química", "codigo": "IQ2211", "creditos": 6, "descripcion": "Fundamentos de química y reacciones", "porcentajeAprobacion": 80 }
+        { "nombre": "Cálculo en Varias Variables", "codigo": "MA2001", "creditos": 6, "descripcion": "Cálculo multivariable y optimización", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Ecuaciones Diferenciales Ordinarias", "codigo": "MA2601", "creditos": 6, "descripcion": "Resolución de ecuaciones diferenciales ordinarias", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Mecánica", "codigo": "FI2001", "creditos": 6, "descripcion": "Mecánica clásica y dinámica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Métodos Experimentales", "codigo": "FI2003", "creditos": 6, "descripcion": "Técnicas experimentales en física", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Química", "codigo": "IQ2211", "creditos": 6, "descripcion": "Fundamentos de química y reacciones", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Química" }
       ]
     },
     {
       "titulo": "Semestre 4",
       "ramos": [
-        { "nombre": "Cálculo Avanzado y Aplicaciones", "codigo": "MA2002", "creditos": 6, "descripcion": "Cálculo vectorial y análisis complejo", "porcentajeAprobacion": 80 },
-        { "nombre": "Economía", "codigo": "IN2201", "creditos": 6, "descripcion": "Principios de economía para ingenieros", "porcentajeAprobacion": 80 },
-        { "nombre": "Electromagnetismo", "codigo": "FI2002", "creditos": 6, "descripcion": "Teoría electromagnética y aplicaciones", "porcentajeAprobacion": 80 },
-        { "nombre": "Termodinámica", "codigo": "FI2004", "creditos": 6, "descripcion": "Principios de termodinámica clásica", "porcentajeAprobacion": 80 },
-        { "nombre": "Módulo Interdisciplinario", "codigo": "CD2201", "creditos": 3, "descripcion": "Proyecto interdisciplinario avanzado", "porcentajeAprobacion": 80 },
-        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH2", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80 }
+        { "nombre": "Cálculo Avanzado y Aplicaciones", "codigo": "MA2002", "creditos": 6, "descripcion": "Cálculo vectorial y análisis complejo", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Economía", "codigo": "IN2201", "creditos": 6, "descripcion": "Principios de economía para ingenieros", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Economía" },
+        { "nombre": "Electromagnetismo", "codigo": "FI2002", "creditos": 6, "descripcion": "Teoría electromagnética y aplicaciones", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Termodinámica", "codigo": "FI2004", "creditos": 6, "descripcion": "Principios de termodinámica clásica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Módulo Interdisciplinario", "codigo": "CD2201", "creditos": 3, "descripcion": "Proyecto interdisciplinario avanzado", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
+        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH2", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" }
       ]
     },
     {
       "titulo": "Semestre 5",
       "ramos": [
-        { "nombre": "Probabilidades y Estadística", "codigo": "MA3403", "creditos": 6, "descripcion": "Teoría de probabilidades y estadística inferencial", "porcentajeAprobacion": 80 },
-        { "nombre": "Modelación y Computación Gráfica para Ingenieros", "codigo": "CC3501", "creditos": 6, "descripcion": "Gráficos por computador y modelación 3D", "porcentajeAprobacion": 80 },
-        { "nombre": "Algoritmos y Estructuras de Datos", "codigo": "CC3001", "creditos": 6, "descripcion": "Estructuras de datos y análisis de algoritmos", "porcentajeAprobacion": 80 },
-        { "nombre": "Matemáticas Discretas para la Computación", "codigo": "CC3101", "creditos": 6, "descripcion": "Matemática discreta aplicada a computación", "porcentajeAprobacion": 80 },
-        { "nombre": "Formación Integral EH/FG", "codigo": "_FI1", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80 },
-        { "nombre": "Formación Integral EH/FG", "codigo": "_FI2", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80 }
+        { "nombre": "Probabilidades y Estadística", "codigo": "MA3403", "creditos": 6, "descripcion": "Teoría de probabilidades y estadística inferencial", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Matemáticas" },
+        { "nombre": "Modelación y Computación Gráfica para Ingenieros", "codigo": "CC3501", "creditos": 6, "descripcion": "Gráficos por computador y modelación 3D", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Computación" },
+        { "nombre": "Algoritmos y Estructuras de Datos", "codigo": "CC3001", "creditos": 6, "descripcion": "Estructuras de datos y análisis de algoritmos", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Computación" },
+        { "nombre": "Matemáticas Discretas para la Computación", "codigo": "CC3101", "creditos": 6, "descripcion": "Matemática discreta aplicada a computación", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Matemáticas" },
+        { "nombre": "Formación Integral EH/FG", "codigo": "_FI1", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" },
+        { "nombre": "Formación Integral EH/FG", "codigo": "_FI2", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" }
       ]
     },
     {
       "titulo": "Semestre 6",
       "ramos": [
-        { "nombre": "Bases de Datos", "codigo": "CC3201", "creditos": 6, "descripcion": "Diseño y gestión de bases de datos", "porcentajeAprobacion": 80 },
-        { "nombre": "Metodologías de Diseño y Programación", "codigo": "CC3002", "creditos": 6, "descripcion": "Paradigmas y patrones de diseño de software", "porcentajeAprobacion": 80 },
-        { "nombre": "Teoría de la Computación", "codigo": "CC3102", "creditos": 6, "descripcion": "Autómatas, lenguajes formales y computabilidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Programación de Software de Sistemas", "codigo": "CC3301", "creditos": 6, "descripcion": "Programación a nivel de sistemas operativos", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo", "codigo": "_ELEC1", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80 }
+        { "nombre": "Bases de Datos", "codigo": "CC3201", "creditos": 6, "descripcion": "Diseño y gestión de bases de datos", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Computación" },
+        { "nombre": "Metodologías de Diseño y Programación", "codigo": "CC3002", "creditos": 6, "descripcion": "Paradigmas y patrones de diseño de software", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Ingeniería de Software" },
+        { "nombre": "Teoría de la Computación", "codigo": "CC3102", "creditos": 6, "descripcion": "Autómatas, lenguajes formales y computabilidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Teoría" },
+        { "nombre": "Programación de Software de Sistemas", "codigo": "CC3301", "creditos": 6, "descripcion": "Programación a nivel de sistemas operativos", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Sistemas" },
+        { "nombre": "Electivo", "codigo": "_ELEC1", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Variable" }
       ]
     },
     {
       "titulo": "Semestre 7",
       "ramos": [
-        { "nombre": "Minería de Datos", "codigo": "CC5205", "creditos": 6, "descripcion": "Análisis y extracción de conocimiento de datos", "porcentajeAprobacion": 80 },
-        { "nombre": "Ingeniería de Software", "codigo": "CC4401", "creditos": 6, "descripcion": "Metodologías ágiles y desarrollo de software", "porcentajeAprobacion": 80 },
-        { "nombre": "Diseño y Análisis de Algoritmos", "codigo": "CC4102", "creditos": 6, "descripcion": "Algoritmos avanzados y análisis de complejidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Sistemas Operativos", "codigo": "CC4302", "creditos": 6, "descripcion": "Arquitectura y diseño de sistemas operativos", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo", "codigo": "_ELEC2", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80 },
-        { "nombre": "Práctica Profesional I", "codigo": "CC4901", "creditos": 7, "descripcion": "Primera práctica profesional en empresa", "porcentajeAprobacion": 80 }
+        { "nombre": "Minería de Datos", "codigo": "CC5205", "creditos": 6, "descripcion": "Análisis y extracción de conocimiento de datos", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Ciencia de Datos" },
+        { "nombre": "Ingeniería de Software", "codigo": "CC4401", "creditos": 6, "descripcion": "Metodologías ágiles y desarrollo de software", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Ingeniería de Software" },
+        { "nombre": "Diseño y Análisis de Algoritmos", "codigo": "CC4102", "creditos": 6, "descripcion": "Algoritmos avanzados y análisis de complejidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Teoría" },
+        { "nombre": "Sistemas Operativos", "codigo": "CC4302", "creditos": 6, "descripcion": "Arquitectura y diseño de sistemas operativos", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Sistemas" },
+        { "nombre": "Electivo", "codigo": "_ELEC2", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Variable" },
+        { "nombre": "Práctica Profesional I", "codigo": "CC4901", "creditos": 7, "descripcion": "Primera práctica profesional en empresa", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Práctica", "area": "Práctica" }
       ]
     },
     {
       "titulo": "Semestre 8",
       "ramos": [
-        { "nombre": "Formulación, Evaluación y Gestión de Proyectos", "codigo": "CC4402", "creditos": 6, "descripcion": "Gestión y evaluación económica de proyectos", "porcentajeAprobacion": 80 },
-        { "nombre": "Lenguajes de Programación", "codigo": "CC4101", "creditos": 6, "descripcion": "Diseño e implementación de lenguajes de programación", "porcentajeAprobacion": 80 },
-        { "nombre": "Redes", "codigo": "CC4303", "creditos": 6, "descripcion": "Arquitectura y protocolos de redes de computadores", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo", "codigo": "_ELEC3", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo", "codigo": "_ELEC4", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80 },
-        { "nombre": "Examen de Suficiencia en Inglés I", "codigo": "EI1090", "creditos": 0, "descripcion": "Certificación de nivel de inglés", "porcentajeAprobacion": 80 }
+        { "nombre": "Formulación, Evaluación y Gestión de Proyectos", "codigo": "CC4402", "creditos": 6, "descripcion": "Gestión y evaluación económica de proyectos", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Gestión" },
+        { "nombre": "Lenguajes de Programación", "codigo": "CC4101", "creditos": 6, "descripcion": "Diseño e implementación de lenguajes de programación", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Teoría" },
+        { "nombre": "Redes", "codigo": "CC4303", "creditos": 6, "descripcion": "Arquitectura y protocolos de redes de computadores", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Obligatorio", "area": "Sistemas" },
+        { "nombre": "Electivo", "codigo": "_ELEC3", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Variable" },
+        { "nombre": "Electivo", "codigo": "_ELEC4", "creditos": 6, "descripcion": "Curso electivo de profundización", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Variable" },
+        { "nombre": "Examen de Suficiencia en Inglés I", "codigo": "EI1090", "creditos": 0, "descripcion": "Certificación de nivel de inglés", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Idiomas" }
       ]
     },
     {
       "titulo": "Semestre 9",
       "ramos": [
-        { "nombre": "Electivo de Especialidad", "codigo": "_EE1", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo de Especialidad", "codigo": "_EE2", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo de Especialidad", "codigo": "_EE3", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Núcleo Gestión para Ingenieros", "codigo": "_NG1", "creditos": 6, "descripcion": "Gestión empresarial para ingenieros", "porcentajeAprobacion": 80 },
-        { "nombre": "Formación Integral de Especialidad", "codigo": "_FIE1", "creditos": 3, "descripcion": "Curso de formación integral de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Formación Integral de Especialidad", "codigo": "_FIE2", "creditos": 3, "descripcion": "Curso de formación integral de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Práctica Profesional II", "codigo": "CC5901", "creditos": 7, "descripcion": "Segunda práctica profesional en empresa", "porcentajeAprobacion": 80 }
+        { "nombre": "Electivo de Especialidad", "codigo": "_EE1", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Especialidad" },
+        { "nombre": "Electivo de Especialidad", "codigo": "_EE2", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Especialidad" },
+        { "nombre": "Electivo de Especialidad", "codigo": "_EE3", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Especialidad" },
+        { "nombre": "Núcleo Gestión para Ingenieros", "codigo": "_NG1", "creditos": 6, "descripcion": "Gestión empresarial para ingenieros", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Núcleo Gestión", "area": "Gestión" },
+        { "nombre": "Formación Integral de Especialidad", "codigo": "_FIE1", "creditos": 3, "descripcion": "Curso de formación integral de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales" },
+        { "nombre": "Formación Integral de Especialidad", "codigo": "_FIE2", "creditos": 3, "descripcion": "Curso de formación integral de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales" },
+        { "nombre": "Práctica Profesional II", "codigo": "CC5901", "creditos": 7, "descripcion": "Segunda práctica profesional en empresa", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Práctica", "area": "Práctica" }
       ]
     },
     {
       "titulo": "Semestre 10",
       "ramos": [
-        { "nombre": "Introducción al Trabajo de Título", "codigo": "CC6907", "creditos": 6, "descripcion": "Preparación y planificación del trabajo de título", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo de Especialidad", "codigo": "_EE4", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo de Especialidad", "codigo": "_EE5", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Proyecto de Software", "codigo": "CC5402", "creditos": 12, "descripcion": "Desarrollo completo de proyecto de software", "porcentajeAprobacion": 80 }
+        { "nombre": "Introducción al Trabajo de Título", "codigo": "CC6907", "creditos": 6, "descripcion": "Preparación y planificación del trabajo de título", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Título", "area": "Título" },
+        { "nombre": "Electivo de Especialidad", "codigo": "_EE4", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Especialidad" },
+        { "nombre": "Electivo de Especialidad", "codigo": "_EE5", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Especialidad" },
+        { "nombre": "Proyecto de Software", "codigo": "CC5402", "creditos": 12, "descripcion": "Desarrollo completo de proyecto de software", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Título", "area": "Ingeniería de Software" }
       ]
     },
     {
       "titulo": "Semestre 11",
       "ramos": [
-        { "nombre": "Trabajo de Título", "codigo": "CC6919", "creditos": 24, "descripcion": "Desarrollo del trabajo de título", "porcentajeAprobacion": 80 },
-        { "nombre": "Electivo de Especialidad", "codigo": "_EE6", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80 },
-        { "nombre": "Examen de Suficiencia en Inglés II", "codigo": "EI2090", "creditos": 0, "descripcion": "Certificación avanzada de nivel de inglés", "porcentajeAprobacion": 80 }
+        { "nombre": "Trabajo de Título", "codigo": "CC6919", "creditos": 24, "descripcion": "Desarrollo del trabajo de título", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Título", "area": "Título" },
+        { "nombre": "Electivo de Especialidad", "codigo": "_EE6", "creditos": 6, "descripcion": "Curso de especialidad", "porcentajeAprobacion": 80, "nivel": "Especialidad", "categoria": "Electivo", "area": "Especialidad" },
+        { "nombre": "Examen de Suficiencia en Inglés II", "codigo": "EI2090", "creditos": 0, "descripcion": "Certificación avanzada de nivel de inglés", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Idiomas" }
+      ]
+    },
+    {
+      "titulo": "Electivos Disponibles",
+      "ramos": [
+        { "codigo": "CC5003", "nombre": "Aplicaciones Web Reactivas", "creditos": 6, "descripcion": "Desarrollo de SPAs modernas usando React, TypeScript y arquitecturas reactivas.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Desarrollo Web", "porcentajeAprobacion": 90 },
+        { "codigo": "CC5002", "nombre": "Desarrollo de Aplicaciones Web", "creditos": 6, "descripcion": "Fundamentos del desarrollo web, HTTP, Backend y Frontend básico.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Desarrollo Web", "porcentajeAprobacion": 88 },
+        { "codigo": "CC6204", "nombre": "Deep Learning", "creditos": 6, "descripcion": "Redes neuronales profundas, CNNs, RNNs y aplicaciones en visión y NLP.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Inteligencia Artificial", "porcentajeAprobacion": 75 },
+        { "codigo": "CC5209", "nombre": "Visión Computacional", "creditos": 6, "descripcion": "Procesamiento de imágenes, geometría multivista y reconocimiento de objetos.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Inteligencia Artificial", "porcentajeAprobacion": 78 },
+        { "codigo": "CC6409", "nombre": "Taller de Desarrollo de Proyectos de IA", "creditos": 6, "descripcion": "Formulación y puesta en producción de sistemas de software con componentes de IA (MLOps).", "nivel": "Especialidad", "categoria": "Electivo", "area": "Inteligencia Artificial", "porcentajeAprobacion": 85 },
+        { "codigo": "CC5213", "nombre": "Recuperación de Información Multimedia", "creditos": 6, "descripcion": "Motores de búsqueda, indexación y recuperación de texto, audio e imágenes.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ciencia de Datos", "porcentajeAprobacion": 80 },
+        { "codigo": "CC5208", "nombre": "Visualización de Información", "creditos": 6, "descripcion": "Técnicas para visualizar datos complejos, interactividad y percepción visual.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ciencia de Datos", "porcentajeAprobacion": 85 },
+        { "codigo": "CC5408", "nombre": "Taller de Diseño y Desarrollo de Videojuegos", "creditos": 6, "descripcion": "Desarrollo práctico de videojuegos, motores gráficos y mecánicas de juego.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Videojuegos", "porcentajeAprobacion": 95 },
+        { "codigo": "CC5409", "nombre": "Taller de Videojuegos Multijugador", "creditos": 6, "descripcion": "Arquitecturas cliente-servidor, sincronización y desarrollo de juegos online.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Videojuegos", "porcentajeAprobacion": 92 },
+        { "codigo": "CC5330", "nombre": "Ciberseguridad", "creditos": 6, "descripcion": "Amenazas informáticas, criptografía aplicada, seguridad en redes y desarrollo seguro.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ciberseguridad", "porcentajeAprobacion": 82 },
+        { "codigo": "CC5301", "nombre": "Introducción a la Criptografía Moderna", "creditos": 6, "descripcion": "Fundamentos matemáticos, cifrado simétrico/asimétrico y protocolos de seguridad.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ciberseguridad", "porcentajeAprobacion": 70 },
+        { "codigo": "CC5304", "nombre": "Arquitectura de Sistemas de Alta Disponibilidad", "creditos": 6, "descripcion": "Balanceo de carga, tolerancia a fallos y continuidad operativa.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Infraestructura", "porcentajeAprobacion": 75 },
+        { "codigo": "CC5308", "nombre": "Administración de Sistemas Linux", "creditos": 6, "descripcion": "Configuración de servicios, scripting y administración de servidores.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Infraestructura", "porcentajeAprobacion": 80 },
+        { "codigo": "CC5322", "nombre": "Taller de Redes de Datos", "creditos": 3, "descripcion": "Ruteo dinámico (BGP, OSPF) y configuración de redes prácticas.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Infraestructura", "porcentajeAprobacion": 85 },
+        { "codigo": "CC5328", "nombre": "Sistemas Embebidos y Sensores", "creditos": 6, "descripcion": "IoT, sensores industriales y procesamiento de datos en el borde.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Infraestructura", "porcentajeAprobacion": 80 },
+        { "codigo": "CC5401", "nombre": "Ingeniería de Software II", "creditos": 6, "descripcion": "Gestión avanzada de proyectos de software y trabajo en equipo.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ingeniería de Software", "porcentajeAprobacion": 85 },
+        { "codigo": "CC6402", "nombre": "Taller Avanzado de Desarrollo Ágil y Lean", "creditos": 6, "descripcion": "Metodologías ágiles avanzadas, Kanban, Lean Software Development.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ingeniería de Software", "porcentajeAprobacion": 90 },
+        { "codigo": "CC5116", "nombre": "Diseño e Implementación de Compiladores", "creditos": 6, "descripcion": "Análisis léxico, sintáctico, semántico y generación de código máquina.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Teoría y Sistemas", "porcentajeAprobacion": 60 },
+        { "codigo": "CC7110", "nombre": "Lenguajes de Programación II", "creditos": 6, "descripcion": "Teoría avanzada de lenguajes y semántica formal.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Teoría y Sistemas", "porcentajeAprobacion": 65 },
+        { "codigo": "CC5101", "nombre": "Análisis Avanzado de Algoritmos", "creditos": 6, "descripcion": "Análisis probabilístico, funciones generatrices y algoritmos aleatorizados.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Teoría y Sistemas", "porcentajeAprobacion": 60 },
+        { "codigo": "CC4006", "nombre": "Taller de Programación Competitiva B", "creditos": 6, "descripcion": "Algoritmos avanzados para competencia (Segment Trees, Flows).", "nivel": "Especialidad", "categoria": "Electivo", "area": "Teoría y Sistemas", "porcentajeAprobacion": 70 },
+        { "codigo": "CC5117", "nombre": "Algoritmos, Redes y Equidad", "creditos": 6, "descripcion": "Sesgos algorítmicos, ética en IA y análisis de redes sociales.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ciencia de Datos", "porcentajeAprobacion": 80 },
+        { "codigo": "CC6104", "nombre": "Pensamiento Estadístico", "creditos": 6, "descripcion": "Inferencia estadística y toma de decisiones basada en datos.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Ciencia de Datos", "porcentajeAprobacion": 75 },
+        { "codigo": "CC5602", "nombre": "Gestión Informática", "creditos": 6, "descripcion": "Estrategia de negocios TI, evaluación de impacto y gestión organizacional.", "nivel": "Especialidad", "categoria": "Núcleo Gestión", "area": "Gestión TI", "porcentajeAprobacion": 88 },
+        { "codigo": "CC5621", "nombre": "Rediseño y Optimización de Procesos", "creditos": 6, "descripcion": "Modelamiento BPM, mejora de procesos de negocio y reingeniería.", "nivel": "Especialidad", "categoria": "Núcleo Gestión", "area": "Gestión TI", "porcentajeAprobacion": 85 },
+        { "codigo": "CC5603", "nombre": "Gestión y Gobernanza de Datos", "creditos": 6, "descripcion": "Calidad de datos, gobierno corporativo y seguridad de la información.", "nivel": "Especialidad", "categoria": "Núcleo Gestión", "area": "Gestión TI", "porcentajeAprobacion": 85 },
+        { "codigo": "CC5615", "nombre": "Business Analytics", "creditos": 6, "descripcion": "Inteligencia de negocios, Data Warehousing y Dashboards.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Gestión TI", "porcentajeAprobacion": 85 },
+        { "codigo": "CC5620", "nombre": "Introducción al Derecho Informático", "creditos": 6, "descripcion": "Marco legal, protección de datos y propiedad intelectual en Chile.", "nivel": "Especialidad", "categoria": "Electivo", "area": "Legal", "porcentajeAprobacion": 90 },
+        { "codigo": "CC5611", "nombre": "Ética para Ingenieros en Computación", "creditos": 3, "descripcion": "Dilemas éticos, responsabilidad social y profesional en tecnología.", "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales", "porcentajeAprobacion": 98 },
+        { "codigo": "CC5613", "nombre": "Taller de Comunicación Efectiva", "creditos": 3, "descripcion": "Oratoria, presentación de proyectos y venta de ideas técnicas.", "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales", "porcentajeAprobacion": 95 },
+        { "codigo": "CC5614", "nombre": "Herramientas para el Trabajo en Equipo", "creditos": 3, "descripcion": "Psicología de equipos, liderazgo y metodologías de colaboración.", "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales", "porcentajeAprobacion": 96 },
+        { "codigo": "CC5622", "nombre": "Taller de Habilidades Profesionales Interpersonales", "creditos": 3, "descripcion": "Comunicación, liderazgo y manejo de conflictos.", "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales", "porcentajeAprobacion": 95 },
+        { "codigo": "CC5623", "nombre": "Taller Desarrollo de Carrera", "creditos": 3, "descripcion": "Planificación de carrera laboral y emprendimiento.", "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales", "porcentajeAprobacion": 95 },
+        { "codigo": "CC5609", "nombre": "Taller de Desarrollo Comercial", "creditos": 3, "descripcion": "Ventas, negociación y habilidades comerciales.", "nivel": "Especialidad", "categoria": "Formación Integral", "area": "Habilidades Profesionales", "porcentajeAprobacion": 95 }
       ]
     }
   ]

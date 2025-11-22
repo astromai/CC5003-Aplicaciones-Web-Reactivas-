@@ -22,8 +22,8 @@ export function transformBackendMalla(backend: any): Malla {
 }
 
 // Crear nueva malla
-export async function crearMalla(nombre: string, numSemestres: number): Promise<Malla> {
-  const response = await axiosSecure.post('/api/mallas', { nombre, numSemestres });
+export async function crearMalla(nombre: string, numSemestres: number, usarBase?: boolean): Promise<Malla> {
+  const response = await axiosSecure.post('/api/mallas', { nombre, numSemestres, usarBase });
   return transformBackendMalla(response.data);
 }
 
@@ -67,6 +67,18 @@ export async function actualizarEstadoRamo(
   const response = await axiosSecure.patch(
     `/api/mallas/${mallaId}/ramos/${ramoId}`,
     { estado }
+  );
+  return transformBackendMalla(response.data);
+}
+
+// Eliminar ramo de un semestre específico
+export async function eliminarRamoDeSemestre(
+  mallaId: string,
+  numeroSemestre: number,
+  ramoId: string
+): Promise<Malla> {
+  const response = await axiosSecure.delete(
+    `/api/mallas/${mallaId}/semestres/${numeroSemestre}/ramos/${ramoId}`
   );
   return transformBackendMalla(response.data);
 }

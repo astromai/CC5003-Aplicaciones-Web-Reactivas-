@@ -8,6 +8,9 @@ export interface Ramo {
   creditos: number;
   descripcion: string;
   porcentajeAprobacion: number;
+  nivel?: 'Plan Común' | 'Especialidad';
+  categoria?: string; // Ej: Ciencias Básicas, Obligatorio, Electivo, Práctica, Núcleo Gestión, Título, Formación Integral
+  area?: string;      // Ej: Matemáticas, Física, Desarrollo Web, IA, etc.
 }
 
 // --- SCHEMA DE RAMO ---
@@ -16,8 +19,15 @@ const ramoSchema = new mongoose.Schema({
   codigo: { type: String, required: true, unique: true },
   creditos: { type: Number, required: true },
   descripcion: { type: String, required: true },
-  porcentajeAprobacion: { type: Number, required: true }
+  porcentajeAprobacion: { type: Number, required: true },
+  nivel: { type: String, enum: ['Plan Común', 'Especialidad'], index: true },
+  categoria: { type: String, index: true },
+  area: { type: String, index: true }
 });
+
+// Índices compuestos para búsquedas frecuentes (opcional)
+ramoSchema.index({ nivel: 1, categoria: 1 });
+ramoSchema.index({ categoria: 1, area: 1 });
 
 // --- MODELO DE RAMO ---
 const RamoModel= mongoose.model<Ramo>("Ramo", ramoSchema);

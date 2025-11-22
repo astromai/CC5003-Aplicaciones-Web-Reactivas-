@@ -6,9 +6,20 @@ export interface RamoBase {
   codigo: string;
   creditos: number;
   estado?: EstadoRamo;
+  nivel?: 'Plan Común' | 'Especialidad';
+  categoria?: string;
+  area?: string;
 }
 
 export interface RamoDetalle extends RamoBase {
   descripcion: string;
   porcentajeAprobacion: number;
+}
+
+export interface RamoFiltersResponse {
+  niveles: string[];
+  categoriasPorNivel: Record<string, string[]>;
+  planComunPrefijos: string[];
+  electivoAreas: string[];
+  gestionAreas: string[];
 }

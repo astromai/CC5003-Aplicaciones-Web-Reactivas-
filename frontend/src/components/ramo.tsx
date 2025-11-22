@@ -21,7 +21,7 @@ export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: RamoBase; onEstado
       }}
     >
       <p>
-        <strong>Nombre: </strong>
+        <strong> </strong>
         <Link to={`/curso/${ramo.id}`} onClick={(e) => e.stopPropagation()} style={{ color: 'inherit'}}>
           {ramo.nombre}
         </Link>
