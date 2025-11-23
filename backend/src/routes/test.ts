@@ -4,8 +4,6 @@ import { reset } from '../controllers/testingController';
 const router = express.Router();
 
 // --- Definición de Rutas para Test ---
-
-// Definimos la ruta para test
 router.post('/reset', reset);
 
 
