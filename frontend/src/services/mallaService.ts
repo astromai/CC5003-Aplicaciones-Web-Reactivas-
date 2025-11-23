@@ -1,6 +1,22 @@
 import axiosSecure from '../utils/axiosSecure';
 import type { Malla, SemestreEnMalla, RamoBase, EstadoRamo } from '../types';
 
+// Conversión entre estados frontend (Capitalizado) y backend (minúsculas)
+function estadoToBackend(e: EstadoRamo): string {
+  return e.toLowerCase();
+}
+function estadoFromBackend(raw: string): EstadoRamo {
+  switch (raw) {
+    case 'pendiente': return 'Pendiente';
+    case 'cursando': return 'Cursando';
+    case 'aprobado': return 'Aprobado';
+    case 'reprobado': return 'Reprobado';
+    default:
+      // Fallback por si llega un valor inesperado; mantenemos tipo consistente
+      return 'Pendiente';
+  }
+}
+
 // Transformar respuesta del backend a tipos frontend
 export function transformBackendMalla(backend: any): Malla {
   return {
@@ -13,7 +29,8 @@ export function transformBackendMalla(backend: any): Malla {
         nombre: r.ramo.nombre,
         codigo: r.ramo.codigo,
         creditos: r.ramo.creditos,
-        estado: r.estado
+        // Convertimos estado del backend (minúsculas) al formato capitalizado del frontend
+        estado: r.estado ? estadoFromBackend(r.estado) : undefined
       }))
     })),
     createdAt: backend.createdAt,
@@ -46,14 +63,15 @@ export async function deleteMalla(mallaId: string): Promise<void> {
 
 // Agregar ramo a un semestre
 export async function agregarRamoASemestre(
-  mallaId: string, 
-  numeroSemestre: number, 
-  ramoId: string, 
+  mallaId: string,
+  numeroSemestre: number,
+  ramoId: string,
   estado: EstadoRamo
 ): Promise<Malla> {
+  // Enviamos estado en minúsculas para cumplir con enum del backend
   const response = await axiosSecure.post(
     `/api/mallas/${mallaId}/semestres/${numeroSemestre}/ramos`,
-    { ramoId, estado }
+    { ramoId, estado: estadoToBackend(estado) }
   );
   return transformBackendMalla(response.data);
 }
@@ -66,7 +84,7 @@ export async function actualizarEstadoRamo(
 ): Promise<Malla> {
   const response = await axiosSecure.patch(
     `/api/mallas/${mallaId}/ramos/${ramoId}`,
-    { estado }
+    { estado: estadoToBackend(estado) }
   );
   return transformBackendMalla(response.data);
 }

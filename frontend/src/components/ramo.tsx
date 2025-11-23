@@ -12,11 +12,14 @@ const estadoClases: Record<string, string> = {
 
 export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: RamoBase; onEstadoChange?: (nuevoEstado: EstadoRamo) => void }) => {
   // Aseguramos un estado por defecto
-  const estadoActual = ramo.estado || 'pendiente';
+  // El backend ahora entrega estados capitalizados; normalizamos a minúsculas para clases
+  const estadoActual = (ramo.estado ? ramo.estado.toLowerCase() : 'pendiente');
 
   const cambiarEstado = () => {
     if (!onEstadoChange) return;
-    onEstadoChange(nextEstado(estadoActual as EstadoRamo));
+    // Convertimos de minúsculas (estadoActual) a capitalizado para nextEstado
+    const capitalizado = (estadoActual.charAt(0).toUpperCase() + estadoActual.slice(1)) as EstadoRamo;
+    onEstadoChange(nextEstado(capitalizado));
   };
 
   return (
@@ -36,9 +39,9 @@ export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: RamoBase; onEstado
 
       {/* Cuerpo: Nombre del Ramo (Link) */}
       <div className="flex-1 flex items-center">
-        <Link 
-          to={`/curso/${ramo.id}`} 
-          onClick={(e) => e.stopPropagation()} 
+        <Link
+          to={`/curso/${ramo.id}`}
+          onClick={(e) => e.stopPropagation()}
           className="ramo-titulo"
         >
           {ramo.nombre}
@@ -47,10 +50,10 @@ export const RamoDisplay = ({ ramo, onEstadoChange }: { ramo: RamoBase; onEstado
 
       {/* Pie: Indicador visual de estado (Barra de progreso decorativa) */}
       <div className="w-full h-1 bg-black/20 rounded-full overflow-hidden">
-        <div 
+        <div
           className={`h-full transition-all duration-500 ${
             estadoActual === 'aprobado' ? 'bg-emerald-400 w-full' :
-            estadoActual === 'cursando' ? 'bg-blue-400 w-1/2 animate-pulse' :
+            estadoActual === 'cursando' ? 'bg-yellow-400 w-1/2 animate-pulse' :
             estadoActual === 'reprobado' ? 'bg-red-400 w-full' : 'w-0'
           }`}
         />
