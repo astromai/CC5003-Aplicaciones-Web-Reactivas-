@@ -3,44 +3,44 @@
     {
       "titulo": "Semestre 1",
       "ramos": [
-        { "nombre": "Introducción al Cálculo", "codigo": "MA1001", "creditos": 6, "descripcion": "Fundamentos de cálculo diferencial e integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
-        { "nombre": "Introducción al Álgebra", "codigo": "MA1101", "creditos": 6, "descripcion": "Álgebra lineal y abstracción matemática básica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
-        { "nombre": "Introducción a la Física Clásica", "codigo": "FI1000", "creditos": 6, "descripcion": "Principios fundamentales de la física clásica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Introducción al Cálculo", "codigo": "MA1001", "creditos": 6, "descripcion": "Fundamentos de cálculo diferencial e integral", "porcentajeAprobacion": 75, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Introducción al Álgebra", "codigo": "MA1101", "creditos": 6, "descripcion": "Álgebra lineal y abstracción matemática básica", "porcentajeAprobacion": 75, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Introducción a la Física Clásica", "codigo": "FI1000", "creditos": 6, "descripcion": "Principios fundamentales de la física clásica", "porcentajeAprobacion": 86, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
         { "nombre": "Herramientas Computacionales", "codigo": "CC1000", "creditos": 3, "descripcion": "Introducción a herramientas computacionales para ingeniería", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Computación" },
-        { "nombre": "Desafíos de Innovación", "codigo": "CD1100", "creditos": 6, "descripcion": "Metodologías de innovación y diseño", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
-        { "nombre": "Aplicaciones de la Biología a la Ingeniería", "codigo": "BT1211", "creditos": 3, "descripcion": "Biología aplicada a problemas de ingeniería", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Biología" }
+        { "nombre": "Desafíos de Innovación", "codigo": "CD1100", "creditos": 6, "descripcion": "Metodologías de innovación y diseño", "porcentajeAprobacion": 99, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
+        { "nombre": "Aplicaciones de la Biología a la Ingeniería", "codigo": "BT1211", "creditos": 3, "descripcion": "Biología aplicada a problemas de ingeniería", "porcentajeAprobacion": 96, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Biología" }
       ]
     },
     {
       "titulo": "Semestre 2",
       "ramos": [
-        { "nombre": "Cálculo Diferencial e Integral", "codigo": "MA1002", "creditos": 6, "descripcion": "Cálculo en una variable real", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
-        { "nombre": "Álgebra Lineal", "codigo": "MA1102", "creditos": 6, "descripcion": "Espacios vectoriales y transformaciones lineales", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
-        { "nombre": "Introducción a la Física Moderna", "codigo": "FI1100", "creditos": 6, "descripcion": "Física cuántica y relatividad especial", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
-        { "nombre": "Introducción a la Programación", "codigo": "CC1002", "creditos": 6, "descripcion": "Fundamentos de programación en Python", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Computación" },
-        { "nombre": "Proyecto de Innovación de Ingeniería y Ciencias", "codigo": "CD1201", "creditos": 3, "descripcion": "Desarrollo de proyecto interdisciplinario de innovación", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
-        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH1", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" }
+        { "nombre": "Cálculo Diferencial e Integral", "codigo": "MA1002", "creditos": 6, "descripcion": "Cálculo en una variable real", "porcentajeAprobacion": 77, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Álgebra Lineal", "codigo": "MA1102", "creditos": 6, "descripcion": "Espacios vectoriales y transformaciones lineales", "porcentajeAprobacion": 89, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Introducción a la Física Moderna", "codigo": "FI1100", "creditos": 6, "descripcion": "Física cuántica y relatividad especial", "porcentajeAprobacion": 89, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Introducción a la Programación", "codigo": "CC1002", "creditos": 6, "descripcion": "Fundamentos de programación en Python", "porcentajeAprobacion": 89, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Computación" },
+        { "nombre": "Proyecto de Innovación de Ingeniería y Ciencias", "codigo": "CD1201", "creditos": 3, "descripcion": "Desarrollo de proyecto interdisciplinario de innovación", "porcentajeAprobacion": 98, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
+        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH1", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 99, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" }
       ]
     },
     {
       "titulo": "Semestre 3",
       "ramos": [
-        { "nombre": "Cálculo en Varias Variables", "codigo": "MA2001", "creditos": 6, "descripcion": "Cálculo multivariable y optimización", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
-        { "nombre": "Ecuaciones Diferenciales Ordinarias", "codigo": "MA2601", "creditos": 6, "descripcion": "Resolución de ecuaciones diferenciales ordinarias", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
-        { "nombre": "Mecánica", "codigo": "FI2001", "creditos": 6, "descripcion": "Mecánica clásica y dinámica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
-        { "nombre": "Métodos Experimentales", "codigo": "FI2003", "creditos": 6, "descripcion": "Técnicas experimentales en física", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
-        { "nombre": "Química", "codigo": "IQ2211", "creditos": 6, "descripcion": "Fundamentos de química y reacciones", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Química" }
+        { "nombre": "Cálculo en Varias Variables", "codigo": "MA2001", "creditos": 6, "descripcion": "Cálculo multivariable y optimización", "porcentajeAprobacion": 87, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Ecuaciones Diferenciales Ordinarias", "codigo": "MA2601", "creditos": 6, "descripcion": "Resolución de ecuaciones diferenciales ordinarias", "porcentajeAprobacion": 88, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Mecánica", "codigo": "FI2001", "creditos": 6, "descripcion": "Mecánica clásica y dinámica", "porcentajeAprobacion": 81, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Métodos Experimentales", "codigo": "FI2003", "creditos": 6, "descripcion": "Técnicas experimentales en física", "porcentajeAprobacion": 96, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Química", "codigo": "IQ2211", "creditos": 6, "descripcion": "Fundamentos de química y reacciones", "porcentajeAprobacion": 83, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Química" }
       ]
     },
     {
       "titulo": "Semestre 4",
       "ramos": [
-        { "nombre": "Cálculo Avanzado y Aplicaciones", "codigo": "MA2002", "creditos": 6, "descripcion": "Cálculo vectorial y análisis complejo", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
-        { "nombre": "Economía", "codigo": "IN2201", "creditos": 6, "descripcion": "Principios de economía para ingenieros", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Economía" },
-        { "nombre": "Electromagnetismo", "codigo": "FI2002", "creditos": 6, "descripcion": "Teoría electromagnética y aplicaciones", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
-        { "nombre": "Termodinámica", "codigo": "FI2004", "creditos": 6, "descripcion": "Principios de termodinámica clásica", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
-        { "nombre": "Módulo Interdisciplinario", "codigo": "CD2201", "creditos": 3, "descripcion": "Proyecto interdisciplinario avanzado", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
-        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH2", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 80, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" }
+        { "nombre": "Cálculo Avanzado y Aplicaciones", "codigo": "MA2002", "creditos": 6, "descripcion": "Cálculo vectorial y análisis complejo", "porcentajeAprobacion": 86, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Matemáticas" },
+        { "nombre": "Economía", "codigo": "IN2201", "creditos": 6, "descripcion": "Principios de economía para ingenieros", "porcentajeAprobacion": 91, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Economía" },
+        { "nombre": "Electromagnetismo", "codigo": "FI2002", "creditos": 6, "descripcion": "Teoría electromagnética y aplicaciones", "porcentajeAprobacion": 86, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Termodinámica", "codigo": "FI2004", "creditos": 6, "descripcion": "Principios de termodinámica clásica", "porcentajeAprobacion": 89, "nivel": "Plan Común", "categoria": "Ciencias Básicas", "area": "Física" },
+        { "nombre": "Módulo Interdisciplinario", "codigo": "CD2201", "creditos": 3, "descripcion": "Proyecto interdisciplinario avanzado", "porcentajeAprobacion": 99, "nivel": "Plan Común", "categoria": "Obligatorio", "area": "Innovación" },
+        { "nombre": "Formación Integral DR/EH/FG/EI/FT", "codigo": "_EH2", "creditos": 3, "descripcion": "Curso de formación integral", "porcentajeAprobacion": 99, "nivel": "Plan Común", "categoria": "Formación Integral", "area": "Humanista" }
       ]
     },
     {
