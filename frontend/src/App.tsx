@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import MallaView from './components/malla'
 import Detalle from './components/detalle'
@@ -9,9 +9,10 @@ import CrearMalla from './components/crearMalla'
 import { useUserStore } from './stores/userStore'
 import './App.css'
 
-function App() {
+function AppContent() {
   const { user, isAuthenticated, restoreSession, logout } = useUserStore()
   const [showRegister, setShowRegister] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     restoreSession()
@@ -20,16 +21,14 @@ function App() {
   const handleLogout = () => {
     logout()
     setShowRegister(false)
-    // Redirección manual sin hook (evita problema de hooks fuera de router)
-    window.location.href = '/'
+    navigate('/')
   }
 
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col text-white">
-        
-        {/* --- Navbar Glassmorphism --- */}
-        <nav className="sticky top-0 z-50 border-b border-white/10 bg-slate-900/80 backdrop-blur-md">
+    <div className="min-h-screen flex flex-col text-white">
+      
+      {/* --- Navbar Glassmorphism --- */}
+      <nav className="sticky top-0 z-50 border-b border-white/10 bg-slate-900/80 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               
@@ -89,6 +88,13 @@ function App() {
           )}
         </main>
       </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   )
 }

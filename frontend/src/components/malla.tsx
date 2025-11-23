@@ -29,8 +29,19 @@ export default function MallaView() {
   };
 
   if (isLoading) return <div className="text-center mt-20 text-cyan-400 animate-pulse">Cargando malla...</div>;
-  if (error) return <div className="text-center mt-20 text-red-400">{error}</div>;
-  if (!mallaActual) return <div className="text-center mt-20 text-red-400">Malla no encontrada</div>;
+  
+  if (error || !mallaActual) return (
+    <div className="text-center mt-20">
+      <div className="text-red-400 mb-6 text-xl">{error || 'Malla no encontrada'}</div>
+      <button 
+        onClick={() => navigate('/mis-mallas')}
+        className="p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors inline-flex items-center gap-2"
+      >
+        <span className="text-2xl">←</span>
+        <span>Volver a Mis Mallas</span>
+      </button>
+    </div>
+  );
 
   return (
     <div className="h-screen flex flex-col bg-slate-900 overflow-hidden">
