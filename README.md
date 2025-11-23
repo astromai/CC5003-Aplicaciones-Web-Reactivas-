@@ -31,3 +31,6 @@ Para el frontend deben hacer lo siguiente (en otra terminal).
 3) npm run dev
 
 Asi podemos conectar adecuadamente el backend con frontend.
+
+
+VERSION TAILWINDS: npm install -D tailwindcss@3.4.17 postcss autoprefixer
