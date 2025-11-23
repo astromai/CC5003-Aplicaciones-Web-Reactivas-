@@ -1,4 +1,10 @@
-# URamos
+# U-Ramos
+
+## Integrantes del Equipo
+- Daniel Ávila 
+- Guillermo Garda
+- Sebastian Gonzalez
+- Tomas Ubilla
 
 Nuestro proyecto es *U-Ramos*, una página web para estudiantes de ingeniería, con el fin de ver y gestionar sus mallas académicas. Esto nace de una dificultad que existe ahora mismo para alumnos de la universidad: donde ver y gestionar los ramos obligatorios, ramos electivos que se quieran tomar de una forma más cómoda y no solamente una vez al inicio de semestre en la Inscripción Académica vía U-Campus.
 
@@ -17,7 +23,7 @@ El estado global está dividido en dos grandes áreas, ambas con su propio store
 
 ## 1. Estado Global de Mallas (`useMallaStore`)
 
-La store `useMallaStore` centraliza toda la lógica relacionada con la gestión de mallas curriculares, tales como su obtención, creación, eliminación y modificación.
+La store `useMallaStore` centraliza toda la lógica relacionada con la gestión de **mallas curriculares**, tales como su obtención, creación, eliminación y modificación.
 
 ### Estado manejado
 
@@ -48,7 +54,7 @@ Elimina un ramo de un semestre específico.
 
 ## 2. Estado Global de Autenticación (`useUserStore`)
 
-La store `useUserStore` gestiona todo lo relacionado con la autenticación del usuario: login, registro, logout y restauración de sesión.
+La store `useUserStore` gestiona todo lo relacionado con la **autenticación del usuario**: login, registro, logout y restauración de sesión.
 
 ### Estado manejado
 
@@ -126,20 +132,110 @@ Cierra la sesión del usuario autenticado.
 #### **GET /me**  
 Obtiene la información del usuario autenticado.
 
+# Flujo de Autenticación del Sistema
 
+El sistema utiliza **JWT en cookies HttpOnly**, junto con un **token CSRF**, para manejar sesiones seguras entre el cliente y el servidor. A continuación se describe el flujo completo basado en los archivos `config.ts`, `middleware.ts`, `userController.ts`, `User.ts` y `user.ts`.
 
+## 1. Configuración del Sistema (`config.ts`)
 
+El archivo `config.ts` centraliza las variables sensibles y de entorno necesarias para la autenticación:
+
+- **JWT_SECRET**: clave usada para firmar y verificar tokens JWT.
+- **MONGODB_URI** y **MONGODB_DBNAME**: configuración de la base de datos.
+- **PORT** y **HOST**: configuración del servidor.
+- Diferencia automáticamente entornos: `test`, `development`, `production`.
+
+Este archivo asegura que la autenticación utilice siempre el secreto y la configuración correctos.
+
+## 2. Middleware de Autenticación (`withUser`)
+
+El middleware `withUser` se aplica a todas las rutas protegidas.
+
+### **Responsabilidades**
+1. Leer la cookie `token` enviada por el cliente.
+2. Verificar y decodificar el JWT usando `JWT_SECRET`.
+3. Validar el token anti-CSRF:
+   - El token decodificado contiene `csrf`.
+   - El cliente debe enviarlo en el header `X-CSRF-Token`.
+   - Si no coinciden, tira error **401 Unauthorized**.
+4. Si es válido:
+   - Agrega `req.user = { id, csrf }`
+   - Continúa hacia la ruta protegida.
+
+Este middleware asegura que cada request sea autenticada antes de tocar datos del usuario.
+
+## 3. Modelo de Usuario (`User.ts`)
+
+El modelo define:
+
+- `username` (único)
+- `passwordHash` (contraseña cifrada con bcrypt)
+
+Además, se configura `.toJSON()` para eliminar:
+- `_id`
+- `__v`
+- `passwordHash`
+
+Garantizando que nunca se exponga la contraseña del usuario.
+
+## 4. Inicio de Sesión — `POST /login` (`userController.ts`)
+
+### **Flujo**
+1. El usuario envía `username` y `password`.
+2. Se busca al usuario en MongoDB.
+3. Se compara la contraseña usando **bcrypt.compare**.
+4. Si es válida:
+   - Se genera un objeto `userForToken`:
+     ```json
+     {
+       "username": "...",
+       "csrf": "<uuid>",
+       "id": "<mongo-id>"
+     }
+     ```
+   - Se firma un JWT con `jwt.sign(...)`.
+   - Se devuelve al cliente:
+     - Cookie `token` (HttpOnly, no accesible desde JS)
+     - Header `X-CSRF-Token` con el token CSRF
+     - Respuesta JSON con datos básicos del usuario.
+
+Si la contraseña es incorrecta, devuelve error **401**.
+
+### **Seguridad incluida**
+- Cookie HttpOnly → No se puede leer con JS (evita XSS).
+- Token CSRF → Previene ataques CSRF.
+- Expiración del token → 1 hora.
+
+## 5. Registro de Usuario — `POST /register`
+
+### **Flujo**
+1. El usuario envía `username` y `password`.
+2. Se genera el hash seguro de la contraseña (`bcrypt.hash`).
+3. Se guarda el usuario en MongoDB.
+4. Se devuelve el usuario creado (sin passwordHash).
+
+## 6. Restaurar Sesión — `GET /me`
+
+Ruta protegida mediante `withUser`.
+
+### **Flujo**
+1. El middleware valida el JWT y el CSRF.
+2. Se obtiene la `id` del usuario desde el token decodificado.
+3. Se busca el usuario en MongoDB.
+4. Se devuelven únicamente:
+   ```json
+   { "username": "...", "id": "..." }
+
+Se usa para restaurar sesión tras recargar la página o volver a entrar a la app.
+
+faltan cosas
 
 
 Versión dirigida al hito 2: Backend real + Autenticación + 2 vistas completas adicionales
 
 
 
-## Integrantes
-- Daniel Ávila 
-- Guillermo Garda
-- Sebastian Gonzalez
-- Tomas Ubilla
+
 
 ## Variables de entorno requeridas.
 Antes de correr nuestra aplicación, se necesita las siguientes variables de entorno para su correcto funcionamiento.

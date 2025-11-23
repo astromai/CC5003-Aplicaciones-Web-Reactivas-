@@ -13,10 +13,4 @@ const registerWith = async ( page: Page, username: string, password: string ) =>
     await page.getByRole("button", { name: "Registrarse" }).click();
 }
 
-const MallaWith = async ( page: Page, nombre: string, usuario: string) => {
-    await page.getByRole("textbox", { exact: true }).nth(0).fill(nombre);
-    await page.getByRole("textbox", { exact: true }).nth(1).fill(usuario);   
-    await page.getByRole("button", { name: "Crear Malla" }).click();
-}
-
 export { loginWith, registerWith }
