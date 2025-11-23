@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../stores/userStore';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
   const { register, isLoading, error } = useUserStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,7 +92,7 @@ export default function Register() {
             ¿Ya tienes cuenta?{' '}
             {}
             <button
-              onClick={() => window.location.reload()} 
+              onClick={() => navigate('/', { replace: true })}
               className="text-purple-400 font-semibold hover:text-purple-300 transition-colors"
             >
               Inicia Sesión
@@ -101,3 +103,4 @@ export default function Register() {
     </div>
   );
 }
+

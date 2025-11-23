@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../stores/userStore';
 
 interface LoginProps {
@@ -8,12 +9,20 @@ interface LoginProps {
 export default function Login({ onShowRegister }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login, isLoading, error } = useUserStore();
+  const navigate = useNavigate();
+  const { login, isLoading, error, isAuthenticated } = useUserStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await login({ username, password });
   };
+
+  // Al autenticarse, redirigir siempre a listado de mallas para evitar ruta previa pegada
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/mis-mallas', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="w-full max-w-md">
