@@ -8,7 +8,8 @@ import cookieParser from "cookie-parser";
 import config from "./utils/config";
 import ramoRoutes from './routes/ramos';
 import mallaRoutes from './routes/malla'; 
-import userRoutes from './routes/user'
+import userRoutes from './routes/user';
+import testRoutes from './routes/test';
 
 // --- Conexión a la Base de Datos ---
 console.log("Conectando a MongoDB...");
@@ -50,6 +51,7 @@ app.use(requestLogger);
 app.use("/api/ramos", ramoRoutes);
 app.use("/api/mallas", mallaRoutes); 
 app.use("/api/user", userRoutes);
+app.use("/api/testing", testRoutes);
 
 // --- Manejador de Errores ---
 const errorHandler = (

@@ -76,7 +76,8 @@ export default function CrearMalla() {
             type="number"
             min="1"
             max="20"
-            value={usarBase ? 11 : numSemestres}
+            value={usarBase ? 11 : numSemestres === 8 ? '' : numSemestres} 
+            placeholder="Ej: 10"
             onChange={(e) => setNumSemestres(parseInt(e.target.value))}
             style={{
               width: '100%',
