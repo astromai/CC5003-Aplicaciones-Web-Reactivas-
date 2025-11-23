@@ -20,11 +20,12 @@ function App() {
   const handleLogout = () => {
     logout()
     setShowRegister(false)
+    // Redirección manual sin hook (evita problema de hooks fuera de router)
+    window.location.href = '/'
   }
 
   return (
     <BrowserRouter>
-      {}
       <div className="min-h-screen flex flex-col text-white">
         
         {/* --- Navbar Glassmorphism --- */}
