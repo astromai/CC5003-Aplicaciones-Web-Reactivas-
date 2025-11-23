@@ -1,38 +1,35 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { crearMalla } from '../services/mallaService';
+import { useMallaStore } from '../stores/mallaStore';
 
 export default function CrearMalla() {
   const [nombre, setNombre] = useState('');
   const [numSemestres, setNumSemestres] = useState(8);
-  const [loading, setLoading] = useState(false);
   const [usarBase, setUsarBase] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
+  const { createMalla, isLoading, error } = useMallaStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!nombre.trim()) {
-      setError('El nombre de la malla es requerido');
+      setFormError('El nombre de la malla es requerido');
       return;
     }
 
     if (numSemestres < 1 || numSemestres > 20) {
-      setError('El número de semestres debe estar entre 1 y 20');
+      setFormError('El número de semestres debe estar entre 1 y 20');
       return;
     }
 
-    setLoading(true);
-    setError(null);
+    setFormError(null);
 
     try {
-      const nuevaMalla = await crearMalla(nombre, numSemestres, usarBase);
+      const nuevaMalla = await createMalla(nombre, numSemestres, usarBase);
       navigate(`/malla/${nuevaMalla.id}`);
-    } catch (err: any) {
-      console.error('Error al crear malla:', err);
-      setError(err.response?.data?.error || 'Error al crear la malla');
-      setLoading(false);
+    } catch (err) {
+      // Error ya manejado en mallaStore, createMalla.
     }
   };
 
@@ -67,7 +64,7 @@ export default function CrearMalla() {
               color: 'white',
               fontSize: '16px'
             }}
-            disabled={loading}
+            disabled={isLoading}
           />
         </div>
 
@@ -90,7 +87,7 @@ export default function CrearMalla() {
               color: 'white',
               fontSize: '16px'
             }}
-            disabled={loading || usarBase}
+            disabled={isLoading || usarBase}
           />
           {usarBase && (
             <p style={{ color: '#ccc', marginTop: 6, fontSize: 13 }}>
@@ -99,7 +96,7 @@ export default function CrearMalla() {
           )}
         </div>
 
-        {error && (
+        {(formError || error) && (
           <div style={{ 
             padding: '12px', 
             marginBottom: '16px', 
@@ -107,7 +104,7 @@ export default function CrearMalla() {
             borderRadius: '8px',
             color: '#ff6b6b'
           }}>
-            {error}
+            {formError || error}
           </div>
         )}
 
@@ -117,7 +114,7 @@ export default function CrearMalla() {
             type="checkbox"
             checked={usarBase}
             onChange={(e) => { const checked = e.target.checked; setUsarBase(checked); if (checked) setNumSemestres(11); }}
-            disabled={loading}
+            disabled={isLoading}
             style={{ width: 18, height: 18, cursor: 'pointer' }}
           />
           <label htmlFor="usarBase" style={{ color: 'white', cursor: 'pointer', userSelect: 'none' }}>
@@ -139,7 +136,7 @@ export default function CrearMalla() {
               fontSize: '16px',
               cursor: 'pointer'
             }}
-            disabled={loading}
+            disabled={isLoading}
           >
             Cancelar
           </button>
@@ -153,12 +150,12 @@ export default function CrearMalla() {
               backgroundColor: '#4e6269ff',
               color: 'white',
               fontSize: '16px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              opacity: loading ? 0.6 : 1
+              cursor: isLoading ? 'not-allowed' : 'pointer',
+              opacity: isLoading ? 0.6 : 1
             }}
-            disabled={loading}
+            disabled={isLoading}
           >
-            {loading ? 'Creando...' : 'Crear Malla'}
+            {isLoading ? 'Creando...' : 'Crear Malla'}
           </button>
         </div>
       </form>

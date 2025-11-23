@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { getMallasUsuario, deleteMalla as deleteMallaService, getMallaById, actualizarEstadoRamo as actualizarEstadoRamoService, eliminarRamoDeSemestre as eliminarRamoService } from '../services/mallaService';
+import { getMallasUsuario, deleteMalla as deleteMallaService, getMallaById, actualizarEstadoRamo as actualizarEstadoRamoService, eliminarRamoDeSemestre as eliminarRamoService, crearMalla as crearMallaService } from '../services/mallaService';
 import type { Malla, EstadoRamo } from '../types';
 
 interface MallaState {
@@ -10,6 +10,7 @@ interface MallaState {
 
   fetchMallasUser: () => Promise<void>;
   fetchMallaById: (mallaId: string) => Promise<void>;
+  createMalla: (nombre: string, numSemestres: number, usarBase: boolean) => Promise<Malla>;
   deleteMalla: (mallaId: string) => Promise<void>;
   updateRamoEstado: (mallaId: string, ramoId: string, nuevoEstado: EstadoRamo) => Promise<void>;
   removeRamoFromSemestre: (mallaId: string, semestreNumero: number, ramoId: string) => Promise<void>;
@@ -37,6 +38,30 @@ export const useMallaStore = create<MallaState>((set, get) => ({
         error: 'Error al cargar las mallas.',
         isLoading: false,
       });
+    }
+  },
+
+  createMalla: async (nombre: string, numSemestres: number, usarBase: boolean) => {
+    set({ isLoading: true, error: null });
+    try {
+      const nuevaMalla = await crearMallaService(nombre, numSemestres, usarBase);
+      
+      // Agregar la nueva malla al array de mallas
+      const { mallas } = get();
+      set({
+        mallas: [...mallas, nuevaMalla],
+        isLoading: false,
+        error: null,
+      });
+      
+      return nuevaMalla;
+    } catch (error: any) {
+      console.error('Error al crear malla:', error);
+      set({
+        error: error.response?.data?.error || 'Error al crear la malla.',
+        isLoading: false,
+      });
+      throw error;
     }
   },
 
