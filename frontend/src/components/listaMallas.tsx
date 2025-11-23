@@ -1,44 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getMallasUsuario, deleteMalla } from '../services/mallaService';
-import type { Malla } from '../types';
+import { useMallaStore } from '../stores/mallaStore';
 
 export default function ListaMallas() {
-  const [mallas, setMallas] = useState<Malla[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { mallas, isLoading, error, fetchMallasUser, deleteMalla } = useMallaStore();
 
   useEffect(() => {
-    cargarMallas();
-  }, []);
-
-  const cargarMallas = async () => {
-    try {
-      const data = await getMallasUsuario();
-      setMallas(data);
-      setError(null);
-    } catch (err: any) {
-      console.error('Error al cargar mallas:', err);
-      setError('Error al cargar las mallas');
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchMallasUser();
+  }, [fetchMallasUser]);
 
   const handleEliminar = async (mallaId: string, nombre: string, e: React.MouseEvent) => {
     e.stopPropagation(); // Evitar que el click abra la malla
     if (!confirm(`¿Estás seguro de eliminar la malla "${nombre}"?`)) return;
-
-    try {
-      await deleteMalla(mallaId);
-      setMallas(mallas.filter(m => m.id !== mallaId));
-    } catch (err: any) {
-      alert('Error al eliminar la malla');
-    }
+    
+    await deleteMalla(mallaId);
   };
 
-  if (loading) return <div className="text-center mt-20 text-xl text-cyan-400 animate-pulse">Cargando tus mallas...</div>;
+  if (isLoading) return <div className="text-center mt-20 text-xl text-cyan-400 animate-pulse">Cargando tus mallas...</div>;
 
   return (
     <div className="max-w-7xl mx-auto p-8">
