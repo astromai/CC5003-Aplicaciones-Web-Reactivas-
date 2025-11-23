@@ -55,10 +55,10 @@ export const useMallaStore = create<MallaState>((set, get) => ({
       });
       
       return nuevaMalla;
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error al crear malla:', error);
       set({
-        error: error.response?.data?.error || 'Error al crear la malla.',
+        error: 'Error al crear la malla.',
         isLoading: false,
       });
       throw error;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getRamoFilters, getRamosFiltrados } from '../services/ramoService';
 import { agregarRamoASemestre } from '../services/mallaService';
 import type { EstadoRamo, RamoDetalle, RamoFiltersResponse, Malla } from '../types';
+import { AxiosError } from 'axios';
 
 interface Props {
   mallaId: string;
@@ -128,9 +129,12 @@ const AgregarRamo: React.FC<Props> = ({ mallaId, semestreNumero, onClose, onAdde
       const mallaActualizada = await agregarRamoASemestre(mallaId, semestreNumero, ramoId, estadoInicial);
       onAdded(mallaActualizada);
       onClose();
-    } catch (e: any) {
-      console.error(e);
-      alert(e.response?.data?.error || 'Error agregando ramo');
+    } catch (error: unknown) {
+      console.error(error);
+      const message = error instanceof AxiosError
+        ? error.response?.data?.error || 'Error agregando ramo'
+        : 'Error agregando ramo';
+      alert(message);
     }
   };
 

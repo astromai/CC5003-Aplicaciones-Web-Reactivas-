@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import type { RamoDetalle } from '../types';
 import { getRamoById } from '../services/ramoService';
+import { AxiosError } from 'axios';
 
 export const DetalleDisplay = ({ ramo }: { ramo: RamoDetalle }) => {
   return (
@@ -49,9 +50,12 @@ export default function Detalle() {
         if (!cancelled) {
           setCurso(ramo);
         }
-      } catch (e: any) {
+      } catch (error: unknown) {
         if (!cancelled) {
-          setError(e.response?.data?.error || 'No se pudo cargar el ramo');
+          const message = error instanceof AxiosError
+            ? error.response?.data?.error || 'No se pudo cargar el ramo'
+            : 'No se pudo cargar el ramo';
+          setError(message);
           setCurso(null);
         }
       } finally {

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import loginService from '../services/login';
 import type { User } from '../types/user';
+import { AxiosError } from 'axios';
 
 interface Credentials {
   username: string;
@@ -59,10 +60,13 @@ export const useUserStore = create<UserState>((set) => ({
         isLoading: false,
         error: null,
       });
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error en registro:', error);
+      const message = error instanceof AxiosError
+        ? error.response?.data?.error || 'Error al registrarse.'
+        : 'Error al registrarse.';
       set({
-        error: 'Error al registrarse.',
+        error: message,
         isLoading: false,
         isAuthenticated: false,
       });
