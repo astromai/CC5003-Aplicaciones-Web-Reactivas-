@@ -1,6 +1,27 @@
 import axiosSecure from '../utils/axiosSecure';
 import type { Malla, SemestreEnMalla, RamoBase, EstadoRamo } from '../types';
 
+// Tipo para manejar el que viene del backend (MongoDB) en el frontend
+type BackendMalla = {
+  _id?: string;
+  id?: string;
+  nombre: string;
+  semestres: Array<{
+    numero: number;
+    ramos: Array<{
+      ramo: {
+        _id: string;
+        nombre: string;
+        codigo: string;
+        creditos: number;
+      };
+      estado: string;
+    }>;
+  }>;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 // Conversión entre estados frontend (Capitalizado) y backend (minúsculas)
 function estadoToBackend(e: EstadoRamo): string {
   return e.toLowerCase();
@@ -18,14 +39,14 @@ function estadoFromBackend(raw: string): EstadoRamo {
 }
 
 // Transformar respuesta del backend a tipos frontend
-export function transformBackendMalla(backend: any): Malla {
+export function transformBackendMalla(backend: BackendMalla): Malla {
   return {
-    id: backend.id || backend._id,
+    id: backend.id || backend._id || '',
     nombre: backend.nombre,
-    semestres: backend.semestres.map((sem: any): SemestreEnMalla => ({
+    semestres: backend.semestres.map((sem): SemestreEnMalla => ({
       numero: sem.numero,
-      ramos: (sem.ramos || []).map((r: any): RamoBase => ({
-        id: String(r.ramo._id || r.ramo),
+      ramos: (sem.ramos || []).map((r): RamoBase => ({
+        id: String(r.ramo._id),
         nombre: r.ramo.nombre,
         codigo: r.ramo.codigo,
         creditos: r.ramo.creditos,

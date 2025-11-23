@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getRamoFilters, getRamosFiltrados } from '../services/ramoService';
 import { agregarRamoASemestre } from '../services/mallaService';
-import type { EstadoRamo, RamoDetalle, RamoFiltersResponse } from '../types';
+import type { EstadoRamo, RamoDetalle, RamoFiltersResponse, Malla } from '../types';
 
 interface Props {
   mallaId: string;
   semestreNumero: number;
   onClose: () => void;
-  onAdded: (mallaActualizada: any) => void;
+  onAdded: (mallaActualizada: Malla) => void;
 }
 
 const estadoOptions: EstadoRamo[] = ['Pendiente', 'Cursando', 'Aprobado', 'Reprobado'];
@@ -32,7 +32,7 @@ const AgregarRamo: React.FC<Props> = ({ mallaId, semestreNumero, onClose, onAdde
         const data = await getRamoFilters();
         setFilters(data);
         setError(null);
-      } catch (e: any) {
+      } catch (e) {
         console.error(e);
         setError('Error cargando filtros');
       } finally {

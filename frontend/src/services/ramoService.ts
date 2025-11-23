@@ -1,7 +1,9 @@
 import axiosSecure from '../utils/axiosSecure';
 import type { RamoDetalle, RamoFiltersResponse } from '../types';
 
-export function buildRamoDetalle(raw: any): RamoDetalle {
+type BackendRamo = Omit<RamoDetalle, 'id'> & { _id?: string; id?: string };
+
+export function buildRamoDetalle(raw: BackendRamo): RamoDetalle {
   return {
     id: String(raw._id || raw.id),
     nombre: raw.nombre,
