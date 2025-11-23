@@ -1,27 +1,10 @@
 import axiosSecure from '../utils/axiosSecure';
 import type { RamoDetalle, RamoFiltersResponse } from '../types';
 
-type BackendRamo = Omit<RamoDetalle, 'id'> & { _id?: string; id?: string };
-
-export function buildRamoDetalle(raw: BackendRamo): RamoDetalle {
-  return {
-    id: String(raw._id || raw.id),
-    nombre: raw.nombre,
-    codigo: raw.codigo,
-    creditos: raw.creditos,
-    descripcion: raw.descripcion,
-    porcentajeAprobacion: raw.porcentajeAprobacion,
-    estado: undefined,
-    nivel: raw.nivel,
-    categoria: raw.categoria,
-    area: raw.area
-  };
-}
-
 // Obtener todos los ramos disponibles
 export async function getRamosDisponibles(): Promise<RamoDetalle[]> {
   const response = await axiosSecure.get('/api/ramos');
-  return response.data.map(buildRamoDetalle);
+  return response.data;
 }
 
 // Obtener ramos filtrados
@@ -29,7 +12,7 @@ export async function getRamosFiltrados(params: { nivel?: string; categoria?: st
   const query = new URLSearchParams();
   Object.entries(params).forEach(([k,v]) => { if (v) query.append(k, v); });
   const response = await axiosSecure.get(`/api/ramos?${query.toString()}`);
-  return response.data.map(buildRamoDetalle);
+  return response.data;
 }
 
 // Obtener filtros disponibles
@@ -41,5 +24,5 @@ export async function getRamoFilters(): Promise<RamoFiltersResponse> {
 // Obtener detalle de un ramo específico
 export async function getRamoById(ramoId: string): Promise<RamoDetalle> {
   const response = await axiosSecure.get(`/api/ramos/${ramoId}`);
-  return buildRamoDetalle(response.data);
+  return response.data;
 }
