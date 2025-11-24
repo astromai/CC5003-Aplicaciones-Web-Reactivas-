@@ -418,11 +418,6 @@ Los tests aseguran que un usuario puede:
 - Usar el sistema de autenticación.
 
 
-
-
-
-
-
 # **Decisiones de Diseño** 
 
 Se implementó un diseño moderno basado en capas semitransparentes con desenfoque (backdrop-blur), simulando paneles de vidrio flotantes sobre un fondo oscuro dinámico.
@@ -441,12 +436,16 @@ Los ramos utilizan códigos de color automáticos para indicar su estado académ
 
  Uso de Grid y Flexbox de Tailwind para adaptar la visualización de las mallas tipo "Pizarra Kanban" (scroll horizontal) y listas de tarjetas.
 
+# **URL de la aplicación desplegada** 
 
-Versión dirigida al hito 2: Backend real + Autenticación + 2 vistas completas adicionales
+Para el momento de hacer el deploy, hubo muchos problemas debido al servidor. Así que tuvimos que probarlo en los 4 puertos disponibles para nosotros.
 
+URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7128
+URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7141
+URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7177
+URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7185
 
-
-
+En alguno de los 4 estará deployado al momento de presentar este proyecto.
 
 ## Variables de entorno requeridas.
 Antes de correr nuestra aplicación, se necesita las siguientes variables de entorno para su correcto funcionamiento.
