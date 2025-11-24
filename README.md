@@ -84,55 +84,55 @@ Restaura la sesión previa al cargar la aplicación (ideal para recordar al usua
 
 ### 1. Rutas para el Manejo de las Mallas
 
-#### **POST /**  
+#### **`POST /`**  
 Crea una nueva malla.
 
-#### **GET /**  
+#### **`GET /`**  
 Obtiene todas las mallas del usuario autenticado.
 
-#### **GET /:mallaId**  
+#### **`GET /:mallaId`**  
 Obtiene una malla específica por ID.
 
-#### **DELETE /:mallaId**  
+#### **`DELETE /:mallaId`**  
 Elimina una malla por su ID.
 
-#### **POST /:mallaId/semestres/:numero/ramos**  
+#### **`POST /:mallaId/semestres/:numero/ramos`**  
 Agrega un ramo a un semestre específico dentro de la malla.
 
-#### **DELETE /:mallaId/semestres/:numero/ramos/:ramoId**  
+#### **`DELETE /:mallaId/semestres/:numero/ramos/:ramoId`**  
 Elimina un ramo de un semestre de la malla.
 
-#### **PATCH /:mallaId/ramos/:ramoId**  
+#### **`PATCH /:mallaId/ramos/:ramoId`**  
 Actualiza el estado de un ramo (Aprobado, Reprobado, Pendiente).
 
 ### 2. Rutas para el Manejo de Ramos
 
-#### **GET /ramos/**  
+#### **`GET /ramos/`**  
 Obtiene la lista completa de ramos.
 
-#### **GET /ramos/filters**  
+#### **`GET /ramos/filters`**  
 Obtiene los filtros disponibles para ramos (por ejemplo: área, tipo, requisitos, créditos, etc.).
 
-#### **GET /ramos/:id**  
+#### **`GET /ramos/:id`**  
 Obtiene un ramo específico por su ID.
 
 ### 3. Rutas para el Sistema (Reset)
 
-#### **POST /reset**  
+#### **`POST /reset`**  
 Reinicia o restablece información del sistema según lo definido en el backend.
 
 ### 4. Rutas de Autenticación
 
-#### **POST /login**  
+#### **`POST /login`**  
 Inicia sesión con credenciales y devuelve un token/cookie de sesión.
 
-#### **POST /register**  
+#### **`POST /register`**  
 Registra un nuevo usuario en el sistema.
 
-#### **POST /logout**  
+#### **`POST /logout`**  
 Cierra la sesión del usuario autenticado.
 
-#### **GET /me**  
+#### **`GET /me`**  
 Obtiene la información del usuario autenticado.
 
 # **Flujo de Autenticación del Sistema**
