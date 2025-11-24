@@ -12,7 +12,7 @@ Nuestro proyecto es *U-Ramos*, una página web para estudiantes de ingeniería, 
 
 Dado esto, con nuestro proyecto buscamos crear una página que sea cómoda de usar, sea eficiente para gestionar y planificar los ramos de cada persona y ayude a los alumnos a tener una mejor plataforma para visualizar los ramos de su malla académica.
 
-Esta se componente de vistas para login y register de usuarios, lista de mallas del usuario, mallas particulares, y descripciones del ramos. 
+A rasgos generales, esta se compone de vistas para login y register de usuarios, lista de mallas del usuario, mallas particulares, y descripciones de ramos. Se pueden crear mallas con cantidades de semestres personalizado, escoger ramos tanto de Plan Común como de especialidad (para efecto de este proyecto, solo ramos DCC), barra de progreso y de colores sobre los ramos (para ver si un ramo está aprobado, reprobado o en progreso, dependiendo de como lo maneje el usuario), al igual de poder quitar ramos o eliminar mallas. Y por supuesto, login, register y logout para los usuarios de la aplicación web.
 
 ## **Estructura del Estado Global**
 
