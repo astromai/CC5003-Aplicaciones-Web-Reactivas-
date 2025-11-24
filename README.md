@@ -228,7 +228,24 @@ Ruta protegida mediante `withUser`.
 
 Se usa para restaurar sesión tras recargar la página o volver a entrar a la app.
 
-faltan cosas
+
+### ** Decisiones de Diseño ** 
+
+Se implementó un diseño moderno basado en capas semitransparentes con desenfoque (backdrop-blur), simulando paneles de vidrio flotantes sobre un fondo oscuro dinámico.
+
+La aplicación utiliza una paleta de colores oscuros (slate-900) para reducir la fatiga visual, con acentos en colores neón (Cyan, Emerald, Purple) para destacar acciones y estados.
+
+Los ramos utilizan códigos de color automáticos para indicar su estado académico:
+
+ Verde/Emerald: Aprobado.
+
+ Azul: Cursando (con animación de pulso).
+
+ Gris: Pendiente.
+
+ Rojo: Reprobado.
+
+ Uso de Grid y Flexbox de Tailwind para adaptar la visualización de las mallas tipo "Pizarra Kanban" (scroll horizontal) y listas de tarjetas.
 
 
 Versión dirigida al hito 2: Backend real + Autenticación + 2 vistas completas adicionales
