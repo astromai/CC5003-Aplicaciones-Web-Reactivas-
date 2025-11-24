@@ -1,6 +1,6 @@
-# U-Ramos
+# **U-Ramos**
 
-## Integrantes del Equipo
+## **Integrantes del Equipo**
 - Daniel Ávila 
 - Guillermo Garda
 - Sebastian Gonzalez
@@ -10,7 +10,7 @@ Nuestro proyecto es *U-Ramos*, una página web para estudiantes de ingeniería, 
 
 Dado esto, con nuestro proyecto buscamos crear una página que sea cómoda de usar, sea eficiente para gestionar y planificar los ramos de cada persona y ayude a los alumnos a tener una mejor plataforma para visualizar los ramos de su malla académica.
 
-## Estructura del Estado Global
+## **Estructura del Estado Global**
 
 Esta store centraliza toda la lógica relacionada con las mallas curriculares, incluyendo su obtención, creación, edición y eliminación.
 
@@ -77,7 +77,7 @@ Cierra la sesión y limpia todos los datos del usuario.
 #### **`restoreSession()`**
 Restaura la sesión previa al cargar la aplicación (ideal para recordar al usuario).
 
-## Mapa de Rutas
+## **Mapa de Rutas**
 
 ### 1. Rutas para el Manejo de las Mallas
 
@@ -132,7 +132,7 @@ Cierra la sesión del usuario autenticado.
 #### **GET /me**  
 Obtiene la información del usuario autenticado.
 
-# Flujo de Autenticación del Sistema
+# **Flujo de Autenticación del Sistema**
 
 El sistema utiliza **JWT en cookies HttpOnly**, junto con un **token CSRF**, para manejar sesiones seguras entre el cliente y el servidor. A continuación se describe el flujo completo basado en los archivos `config.ts`, `middleware.ts`, `userController.ts`, `User.ts` y `user.ts`.
 
@@ -228,8 +228,59 @@ Ruta protegida mediante `withUser`.
 
 Se usa para restaurar sesión tras recargar la página o volver a entrar a la app.
 
+## 7. Cierre de Sesión — `POST /logout`
 
-### ** Decisiones de Diseño ** 
+El cierre de sesión borra completamente la sesión del usuario desde el servidor.
+
+### **Flujo**
+1. El cliente envía una petición `POST /logout`.
+2. El controlador ejecuta:
+   ```ts
+   res.clearCookie("token");
+
+Esto elimina la cookie que contiene el JWT.
+
+## 8. Registradores y Manejo de Errores
+
+El sistema incorpora middlewares adicionales que aseguran un funcionamiento consistente, permiten depuración y garantizan respuestas claras durante el flujo de autenticación.
+
+### **8.1 requestLogger**
+
+Middleware definido en `middleware.ts`.  
+Registra cada request entrante mostrando:
+
+- Método HTTP
+- Ruta solicitada
+- Cuerpo del request
+- Separadores para lectura clara
+
+### **8.1 unknownEndpoint**
+
+Middleware definido en `middleware.ts`.  
+Controla toda petición a rutas inexistentes.
+Esto evita comportamientos inesperados cuando el cliente consulta rutas mal escritas o inexistentes.
+
+### **8.3 unknownEndpoint**
+
+Middleware definido en `middleware.ts`.  
+Middleware central de manejo de errores.
+Captura excepciones producidas durante la autenticación y el acceso a datos.
+
+Tipos de errores manejados:
+
+CastError → ID malformado
+
+ValidationError → Error de validación de Mongoose
+
+MongoServerError (duplicate key) → username duplicado
+
+JsonWebTokenError → Token inválido
+
+TokenExpiredError → Token expirado
+
+
+
+# ** Decisiones de Diseño ** 
 
 Se implementó un diseño moderno basado en capas semitransparentes con desenfoque (backdrop-blur), simulando paneles de vidrio flotantes sobre un fondo oscuro dinámico.
 
@@ -257,10 +308,19 @@ Versión dirigida al hito 2: Backend real + Autenticación + 2 vistas completas 
 ## Variables de entorno requeridas.
 Antes de correr nuestra aplicación, se necesita las siguientes variables de entorno para su correcto funcionamiento.
 
+### Para desarrollo
 PORT=3001
 HOST=localhost
 MONGODB_URI=mongodb://localhost:27017/uramos
 MONGODB_DBNAME=uramos
+JWT_SECRET=miclavesecreta
+
+### Para producción
+
+PORT=7177
+HOST=0.0.0.0
+MONGODB_URI=mongodb://fulls:fulls@fullstack.dcc.uchile.cl:27019
+MONGODB_DBNAME=fullstack
 JWT_SECRET=miclavesecreta
 
 ## ¿Como correr nuestra aplicación?
