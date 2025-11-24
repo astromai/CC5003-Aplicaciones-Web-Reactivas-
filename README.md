@@ -4,8 +4,8 @@
 
 - Daniel Ávila 
 - Guillermo Garda
-- Sebastian Gonzalez
-- Tomas Ubilla
+- Sebastián González
+- Tomás Ubilla
 
 ## **Descripción del Proyecto**
 Nuestro proyecto es *U-Ramos*, una página web para estudiantes de ingeniería, con el fin de ver y gestionar sus mallas académicas. Esto nace de una dificultad que existe ahora mismo para alumnos de la universidad: donde ver y gestionar los ramos obligatorios, ramos electivos que se quieran tomar de una forma más cómoda y no solamente una vez al inicio de semestre en la Inscripción Académica vía U-Campus.
