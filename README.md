@@ -18,7 +18,6 @@ Esta se componente de vistas para login y register de usuarios, lista de mallas 
 
 Esta store centraliza toda la lógica relacionada con las mallas curriculares, incluyendo su obtención, creación, edición y eliminación.
 
-
 Este proyecto utiliza la librería **Zustand** para la gestión del estado global, permitiendo una arquitectura más limpia, reactiva y desacoplada.  
 El estado global está dividido en dos grandes áreas, ambas con su propio store:
 
@@ -481,4 +480,5 @@ Para el frontend deben hacer lo siguiente (en otra terminal).
 Asi podemos conectar adecuadamente el backend con frontend.
 
 
-VERSION TAILWINDS: npm install -D tailwindcss@3.4.17 postcss autoprefixer
+**IMPORTANTE**: 
+VERSION TAILWINDS se debe instalar con: npm install -D tailwindcss@3.4.17 postcss autoprefixer
