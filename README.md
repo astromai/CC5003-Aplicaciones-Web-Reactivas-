@@ -1,14 +1,18 @@
 # **U-Ramos**
 
 ## **Integrantes del Equipo**
+
 - Daniel Ávila 
 - Guillermo Garda
 - Sebastian Gonzalez
 - Tomas Ubilla
 
+## **Descripción del Proyecto**
 Nuestro proyecto es *U-Ramos*, una página web para estudiantes de ingeniería, con el fin de ver y gestionar sus mallas académicas. Esto nace de una dificultad que existe ahora mismo para alumnos de la universidad: donde ver y gestionar los ramos obligatorios, ramos electivos que se quieran tomar de una forma más cómoda y no solamente una vez al inicio de semestre en la Inscripción Académica vía U-Campus.
 
 Dado esto, con nuestro proyecto buscamos crear una página que sea cómoda de usar, sea eficiente para gestionar y planificar los ramos de cada persona y ayude a los alumnos a tener una mejor plataforma para visualizar los ramos de su malla académica.
+
+Esta se componente de vistas para login y register de usuarios, lista de mallas del usuario, mallas particulares, y descripciones del ramos. 
 
 ## **Estructura del Estado Global**
 
@@ -278,9 +282,148 @@ JsonWebTokenError → Token inválido
 
 TokenExpiredError → Token expirado
 
+# **Descripción de los tests E2E**
+
+## Herramienta utilizada: Playwright
+
+Los tests E2E se desarrollan con **Playwright Test**, que permite:
+
+- Automatizar navegadores reales.
+- Interactuar con elementos usando selectores accesibles (roles ARIA).
+- Simular interacciones de usuario.
+- Reiniciar el backend para aislar escenarios.
+- Usar helpers personalizados para login y registro.
+
+Helpers utilizados:
+
+- `loginWith(page, username, password)`
+- `registerWith(page, username, password)`
+
+Ambos están en helper.ts
+
+## Flujos Cubiertos por los Tests
+
+### 1. Login y Registro
+
+#### Archivo: `loginRegister.spec.ts`
+
+#### Flujos probados:
+
+#### Login con credenciales inválidas
+- Intento de login con usuario inexistente.
+- Se verifica mensaje: *"Error al hacer login. Revisa tus credenciales."*
+
+#### Registro de usuario y ciclo completo
+- Navegar a “Regístrate aquí”.
+- Completar formulario con `registerWith`.
+- Ver aparición de *"Mis Mallas"*.
+- Cerrar sesión y verificar retorno a pantalla inicial.
+
+#### Login con usuario existente
+- Login exitoso usando `loginWith`.
+- Se verifica que se muestre *"Mis Mallas"*.
+
+### 2. Gestión de Mallas
+
+#### Archivo: `malla.spec.ts`
+
+### 2.1 Creación de Mallas
+
+#### No se puede crear una malla sin nombre
+- Crear nueva Malla dejando nombre vacío.
+- Validación esperada: *"El nombre de la malla es requerido"*.
+
+#### Crear una Malla correctamente
+- Completar nombre y créditos.
+- Confirmar creación.
+- Ver la nueva malla visible en pantalla.
+
+#### Crear Malla usando plan base sugerido
+- Marcar *"Iniciar con malla ideal (plan base sugerido)"*.
+- Crear y verificar que aparece correctamente.
+
+## 2.2 Eliminación de una Malla
+
+#### Eliminar Malla existente
+- Hover sobre la malla.
+- Clic en “Eliminar” y aceptar el diálogo.
+- Verificar que ya no existe en la lista.
+
+### 2.3 Agregar Ramos a una Malla
+
+#### Flujos cubiertos por categoría:
+
+##### Agregar Ramo de Plan Común
+- Abrir “Agregar Ramo”.
+- Categoría: Plan Común → CC.
+- Selección de estado (Aprobado).
+- Agregar “Herramientas Computacionales”.
+
+##### Agregar Electivo de Especialidad
+- Categoría: Especialidad → Electivo.
+- Área: Ciberseguridad.
+- Estado: Reprobado.
+- Agregar “Introducción a la Criptografía Moderna”.
+
+##### Agregar Ramo de Núcleo Gestión
+- Categoría: Especialidad → Núcleo Gestión.
+- Área: Todos.
+- Estado: Aprobado.
+- Agregar “Gestión Informática”.
+
+Se valida que los 3 ramos están visibles.
+
+### 2.4 Eliminación de Ramo
+
+- Agregar un Ramo.
+- Ubicar contenedor y su botón “×”.
+- Aceptar confirmación.
+- Validar que el ramo ya no aparece.
+
+### 3. Visualización de Detalles de un Ramo
+
+#### Archivo: `malla.spec.ts`
+
+#### Flujos probados:
+
+Al hacer clic en un ramo, se muestran sus detalles:
+
+- **Nombre**
+- **Código**
+- **Créditos**
+- **Porcentaje de Aprobación**
+- **Descripción**
+
+Ejemplo verificado para “Herramientas Computacionales”:
+
+- Código: `CC1000`
+- Créditos: `3`
+- % de Aprobación: `80%`
+- Descripción: *"Introducción a herramientas computacionales para ingeniería"*
+
+## Resumen General
+
+| Módulo | Flujos Verificados |
+|--------|---------------------|
+| **Autenticación** | Login inválido, registro, logout, login exitoso |
+| **Mallas** | Crear con y sin plan base, validar campos, eliminar |
+| **Ramos** | Agregar por distintas categorías, eliminar |
+| **Detalles** | Ver información completa de un ramo |
+
+Los tests aseguran que un usuario puede:
+
+- Administrar sus Mallas.
+- Agregar y eliminar Ramos.
+- Consultar información detallada.
+- Usar el sistema de autenticación.
 
 
-# ** Decisiones de Diseño ** 
+
+
+
+
+
+# **Decisiones de Diseño** 
 
 Se implementó un diseño moderno basado en capas semitransparentes con desenfoque (backdrop-blur), simulando paneles de vidrio flotantes sobre un fondo oscuro dinámico.
 
