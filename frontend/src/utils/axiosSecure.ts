@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-    baseURL: "http://localhost:3001",
+    baseURL: import.meta.env.PROD 
+        ? "https://fullstack.dcc.uchile.cl:7177" 
+        : "http://localhost:3001",
     withCredentials: true,
 });
 

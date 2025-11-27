@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "ts-node-dev src/index.ts",
-    "start:test": "NODE-ENV=test ts-node-dev src/index.ts"
+    "start:test": "NODE-ENV=test ts-node-dev src/index.ts",
+    "seed" : "node dist/Scripts/seed.js"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",

@@ -72,7 +72,7 @@ function AppContent() {
           {!isAuthenticated ? (
             <div className="flex min-h-[calc(100vh-64px)] items-center justify-center p-4">
               {showRegister ? (
-                <Register />
+                <Register onShowLogin={() => setShowRegister(false)} />
               ) : (
                 <Login onShowRegister={() => setShowRegister(true)} />
               )}

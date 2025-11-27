@@ -32,6 +32,6 @@ userSchema.set("toJSON", {
 });
 
 // --- MODELO DE USUARIO ---
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema, "seba_users");
 
 export default User;

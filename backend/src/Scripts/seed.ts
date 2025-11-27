@@ -4,10 +4,10 @@ import fs from 'fs';
 import path from 'path';
 
 // Importamos solo el modelo Ramo
-import Ramo from '../src/models/Ramo';
+import Ramo from '../models/Ramo';
 
 // Cargamos las variables de entorno para obtener la URI de la base de datos
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 // Leemos el archivo db.json con la nueva clasificación
 const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, './db.json'), 'utf-8'));

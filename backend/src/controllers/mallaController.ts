@@ -24,7 +24,7 @@ export const createMalla = async (req: Request, res: Response, next: NextFunctio
 
     if (usarBase) {
       try {
-        const plantillaPath = path.resolve(__dirname, '../../Scripts/db.json');
+        const plantillaPath = path.resolve(__dirname, '../Scripts/db.json');
         const raw = fs.readFileSync(plantillaPath, 'utf-8');
         const data = JSON.parse(raw);
         const semestresPlantilla = data.semestres || [];

@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../stores/userStore';
 
-export default function Register() {
+interface RegisterProps {
+  onShowLogin?: () => void;
+}
+
+export default function Register({ onShowLogin }: RegisterProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate();
   const { register, isLoading, error } = useUserStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,9 +92,8 @@ export default function Register() {
         <div className="mt-8 text-center">
           <p className="text-slate-400 text-sm">
             ¿Ya tienes cuenta?{' '}
-            {}
             <button
-              onClick={() => navigate('/', { replace: true })}
+              onClick={onShowLogin}
               className="text-purple-400 font-semibold hover:text-purple-300 transition-colors"
             >
               Inicia Sesión

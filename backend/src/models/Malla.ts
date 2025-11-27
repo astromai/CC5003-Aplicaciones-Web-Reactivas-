@@ -42,6 +42,6 @@ mallaSchema.set("toJSON", {
 });
 
 // --- EL MODELO DE LA MALLA ---
-const MallaModel = mongoose.model("Malla", mallaSchema);
+const MallaModel = mongoose.model("Malla", mallaSchema, "seba_mallas");
 
 export default MallaModel;

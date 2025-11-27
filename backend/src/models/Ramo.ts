@@ -30,7 +30,7 @@ ramoSchema.index({ nivel: 1, categoria: 1 });
 ramoSchema.index({ categoria: 1, area: 1 });
 
 // --- MODELO DE RAMO ---
-const RamoModel= mongoose.model<Ramo>("Ramo", ramoSchema);
+const RamoModel= mongoose.model<Ramo>("Ramo", ramoSchema, "seba_ramos");
 
 // --- CONFIGURACIÓN DEL SCHEMA ---
 ramoSchema.set("toJSON", {

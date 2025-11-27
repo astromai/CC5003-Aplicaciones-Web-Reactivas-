@@ -2,7 +2,9 @@ import axios from "axios";
 import axiosSecure from "../utils/axiosSecure";
 import type { User } from "../types/user";
 
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = import.meta.env.PROD 
+    ? "https://fullstack.dcc.uchile.cl:7177" 
+    : "http://localhost:3001";
 axios.defaults.withCredentials = true;
 
 type Credentials = {
@@ -54,7 +56,7 @@ const restoreLogin = async (): Promise<User | null> => {
 };
 
 const register = async (credentials: Credentials): Promise<User> => {
-    const response = await axios.post<User>("/api/user/register", credentials);
+    const response = await axiosSecure.post<User>("/api/user/register", credentials);
     return response.data;
 };
 

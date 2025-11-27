@@ -5,6 +5,7 @@ import express, { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path";
 import config from "./utils/config";
 import ramoRoutes from './routes/ramos';
 import mallaRoutes from './routes/malla'; 
@@ -13,7 +14,9 @@ import testRoutes from './routes/test';
 
 // --- Conexión a la Base de Datos ---
 console.log("Conectando a MongoDB...");
-mongoose.connect(config.MONGODB_URI!)
+mongoose.connect(config.MONGODB_URI!, {
+  dbName: config.MONGODB_DBNAME
+})
   .then(() => {
     console.log("Conectado a MongoDB");
   })
@@ -25,11 +28,13 @@ mongoose.connect(config.MONGODB_URI!)
 const app = express();
 
 // --- Middlewares ---
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true,
-  exposedHeaders: ['X-CSRF-Token']
-}));
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+    exposedHeaders: ['X-CSRF-Token']
+  }));
+}
 app.use(express.json());
 
 app.use(cookieParser());
@@ -52,6 +57,17 @@ app.use("/api/ramos", ramoRoutes);
 app.use("/api/mallas", mallaRoutes); 
 app.use("/api/user", userRoutes);
 app.use("/api/testing", testRoutes);
+
+// Prod
+if (process.env.NODE_ENV === 'production') {
+  const frontendPath = path.join(__dirname, '../../frontend/dist');
+  app.use(express.static(frontendPath));
+  
+  // Fallback para SPA - todas las rutas no-API sirven index.html
+  app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  });
+}
 
 // --- Manejador de Errores ---
 const errorHandler = (
