@@ -41,6 +41,11 @@ test.describe("URamos: create Malla", () => {
     });
     
     test("users can delete a Malla", async ({ page }) => {
+        await page.getByRole("button", { name: "Nueva Malla" }).click();
+        await page.getByRole("textbox", { exact: true }).nth(0).fill("malla DCC 2040");
+        await page.getByRole("checkbox", { name: "Iniciar con malla ideal (plan base sugerido)" }).check();
+        await page.getByRole("button", { name: "Crear Malla" }).click();
+        await page.getByRole("button", { name: "←" }).click();
         await page.getByText("malla DCC 2040").hover();
         page.once("dialog", dialog => dialog.accept());
         await page.getByRole("button", { name: "Eliminar" }).click();
