@@ -437,14 +437,11 @@ Los ramos utilizan códigos de color automáticos para indicar su estado académ
 
 # **URL de la aplicación desplegada** 
 
-Para el momento de hacer el deploy, hubo muchos problemas debido al servidor. Así que tuvimos que probarlo en los 4 puertos disponibles para nosotros.
+Para el momento de hacer el deploy, hubo muchos problemas debido al servidor. Así que tuvimos que probarlo en los 4 puertos disponibles para nosotros. La url es: fullstack.dcc.uchile.cl:7177.
 
-URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7128
-URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7141
-URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7177
-URL de la aplicación desplegada en fullstack.dcc.uchile.cl:7185
+La app se quedó arriba usando pm2.
 
-En alguno de los 4 estará deployado al momento de presentar este proyecto.
+La manera en que se hizo el deploy básicamente fue primero compilando backend y frontend, moviendo el proyecto compilado al server en /uramos y correr un archivo seed para dejar configurada la base de datos. Finalmente, se deja corriendo el server usando pm2. 
 
 ## Variables de entorno requeridas.
 Antes de correr nuestra aplicación, se necesita las siguientes variables de entorno para su correcto funcionamiento.
